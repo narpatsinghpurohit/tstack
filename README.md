@@ -1,5 +1,5 @@
 ## Starter Kit doc
-This starter kit contains code structure that will standardise the code.
+This starter kit contains code structure that will standardise the codebase.
 - It is using mui v5 as styling library
 - It uses funtional components of react
 
