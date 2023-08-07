@@ -56,10 +56,14 @@ This starter kit contains code structure that will standardise the codebase.
 
 
 ## Creating New Page with CLI
+- before this do 
+```properties 
+npm install
+``` 
 - added script that will generate a new page with all the files with example code
 - to create new page use the following command
 ```properties 
-npm run generate-page [PageName]
+npm run generate
 ```
 - page name should be in CamelCase
 
