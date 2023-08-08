@@ -161,5 +161,69 @@ export default ${pageName}Controller;
       });
     });
 
+  },
+  createComponent: (componentName) => {
+    const fs = require('fs');
+    const path = require('path');
+    const componentDirectory = path.join(__dirname, '..', 'src', 'components', componentName);
+    // Create the directory for the new page
+    fs.mkdirSync(componentDirectory);
+
+    // Define the content for each file
+    const tsxContent = `import React from 'react';
+// Custom Imports Start
+import styles from './${componentName}.styles';
+import { Box, Typography, Button } from '@mui/material'
+// Custom Imports End
+
+export type Props = {
+  // Custom Props Start
+  title:string;
+  onClick:() => void
+  // Custom Props End
+};
+ 
+// UI
+const ${componentName} = (props: Props) => {
+ const {title, onClick} = props;
+ return (
+   <Box
+     sx={styles.MainBox}
+   >
+     <Typography sx={styles.ExampleText}>Example Component title: {title}</Typography>
+     <Button sx={styles.ExampleButton} onClick={onClick}>Example Button</Button>
+   </Box>
+ );
+};
+
+export default ${componentName}`;
+
+
+    const styleContent = `// Mui sx styles that will be used inside the sx attribute
+ const styles = {
+     // here sx style objects are defined
+     MainBox:{
+       display:'flex',
+       justifyContent:'center',
+       alignItems:'center',
+       flexDirection:'column'
+     },
+     ExampleText:{
+       fontSize:24,
+       fontWeight:600,
+       marginTop:2,
+       marginBottom:2
+     },
+     ExampleButton:{
+       marginTop:2,
+       marginBottom:2
+     }
+ }
+ 
+ export default styles`;
+
+    fs.writeFileSync(path.join(componentDirectory, `${componentName}.tsx`), tsxContent);
+    fs.writeFileSync(path.join(componentDirectory, `${componentName}.styles.tsx`), styleContent);
+    return true;
   }
 }

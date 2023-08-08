@@ -33,5 +33,10 @@ initPrompt.run().then(answer => {
                 }
             }).catch(console.error)
         }).catch(console.error);
+    }else if(answer === 'component'){
+        prompts.componentNameInput().run().then(componentName => {
+            utils.createComponent(componentName);
+            console.log(`${componentName} generated successfully`)
+        }).catch(console.error())
     }
 }).catch(console.error);

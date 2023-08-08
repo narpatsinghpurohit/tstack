@@ -40,4 +40,10 @@ module.exports = {
             return name.trim();
         },
     }),
+    componentNameInput:() => new Input({
+        message: 'Enter the name of the component in CamelCase:',
+        result(name) {
+            return name.trim();
+        },
+    }),
 };
