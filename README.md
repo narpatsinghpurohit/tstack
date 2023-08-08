@@ -68,9 +68,10 @@ npm run generate
 - page name should be in CamelCase
 
 ## Upcomming feature
-- Creating component(Component.tsx and styles.ts) with CLI
-- Auto add route when creating Page
 - Login and SignUp Page
+
+## Guide
+- using sx style of mui v5 - https://www.youtube.com/watch?v=hHMkuXjRZHY
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
