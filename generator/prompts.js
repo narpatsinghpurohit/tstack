@@ -29,4 +29,15 @@ module.exports = {
         message: 'Select a layout:',
         choices: choices,
     }),
+    askForRoute: () => new Select({
+        name: 'askForRoute',
+        message: 'Do you want to add route as well?',
+        choices: ['Yes', 'No'],
+    }),
+    askForRoutePath: () => new Input({
+        message: 'Enter the route path(this will reflect in url(https:website/route-path)):',
+        result(name) {
+            return name.trim();
+        },
+    }),
 };

@@ -1,21 +1,21 @@
 module.exports = {
-    getLayoutChoices: () => {
-        const fs = require('fs');
-        const path = require('path');
-        const layoutsFolder = path.join(__dirname, '..', 'src/layouts');
-        const layoutFiles = fs.readdirSync(layoutsFolder);
+  getLayoutChoices: () => {
+    const fs = require('fs');
+    const path = require('path');
+    const layoutsFolder = path.join(__dirname, '..', 'src/layouts');
+    const layoutFiles = fs.readdirSync(layoutsFolder);
 
-        return layoutFiles.map(layout => path.basename(layout, '.tsx'));
-    },
-    createPage: (pageName, layout = null) => {
-        const fs = require('fs');
-        const path = require('path');
-        const pageDirectory = path.join(__dirname, '..', 'src', 'pages', pageName);
-        // Create the directory for the new page
-        fs.mkdirSync(pageDirectory);
+    return layoutFiles.map(layout => path.basename(layout, '.tsx'));
+  },
+  createPage: (pageName, layout = null) => {
+    const fs = require('fs');
+    const path = require('path');
+    const pageDirectory = path.join(__dirname, '..', 'src', 'pages', pageName);
+    // Create the directory for the new page
+    fs.mkdirSync(pageDirectory);
 
-        // Define the content for each file
-        const tsxContent = `import React from 'react';
+    // Define the content for each file
+    const tsxContent = `import React from 'react';
 // Custom Imports Start
 import ${pageName}Controller, { Props } from './${pageName}Controller';
 import styles from './${pageName}.styles';
@@ -44,9 +44,9 @@ const ${pageName} = (props: Props) => {
  );
 };
 
-export default ${layout ? `withLayout(${layout})(${pageName});`:`${pageName}`}`;
+export default ${layout ? `withLayout(${layout})(${pageName});` : `${pageName}`}`;
 
-        const controllerContent = `import { useState } from 'react';
+    const controllerContent = `import { useState } from 'react';
 import { generateRandomString } from '../../common/utilities/toolkit';
 
 export type Props = {
@@ -82,7 +82,7 @@ const ${pageName}Controller = (props: Props) => {
 export default ${pageName}Controller;
    `;
 
-        const configContent = `"use-strict";
+    const configContent = `"use-strict";
  Object.defineProperty(exports,
      "__esModule", {
          value:true
@@ -92,11 +92,11 @@ export default ${pageName}Controller;
  // here all static string will be written like api endpoints, any static string
  exports.submit = "Submit"`;
 
-        const assetsContent = `// from here all asset will be exported
+    const assetsContent = `// from here all asset will be exported
  export const logo = "/assets/logo.svg";
    `;
 
-        const styleContent = `// Mui sx styles that will be used inside the sx attribute
+    const styleContent = `// Mui sx styles that will be used inside the sx attribute
  const styles = {
      // here sx style objects are defined
      MainBox:{
@@ -119,13 +119,47 @@ export default ${pageName}Controller;
  
  export default styles`;
 
-        // Create and write the content to each file
-        fs.writeFileSync(path.join(pageDirectory, `${pageName}.tsx`), tsxContent);
-        fs.writeFileSync(path.join(pageDirectory, `${pageName}Controller.ts`), controllerContent);
-        fs.writeFileSync(path.join(pageDirectory, 'config.js'), configContent);
-        fs.writeFileSync(path.join(pageDirectory, 'assets.ts'), assetsContent);
-        fs.writeFileSync(path.join(pageDirectory, `${pageName}.styles.ts`), styleContent);
+    // Create and write the content to each file
+    fs.writeFileSync(path.join(pageDirectory, `${pageName}.tsx`), tsxContent);
+    fs.writeFileSync(path.join(pageDirectory, `${pageName}Controller.ts`), controllerContent);
+    fs.writeFileSync(path.join(pageDirectory, 'config.js'), configContent);
+    fs.writeFileSync(path.join(pageDirectory, 'assets.ts'), assetsContent);
+    fs.writeFileSync(path.join(pageDirectory, `${pageName}.styles.ts`), styleContent);
 
-        return true;
-    }
+    return true;
+  },
+  createRoute: (route, path) => {
+    const fsAr = require('fs');
+    const pathAr = require('path');
+    const filePath = pathAr.join(__dirname, '..', 'src', 'routes.ts'); // Change the path accordingly
+
+    const newImport = `import ${route} from "./pages/${route}/${route}";`;
+
+    const newRoute = `    ${route}:{
+        component:${route},
+        path:'/${path}'
+    },`;
+
+    fsAr.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        console.error('Error reading file:', err);
+        return;
+      }
+
+      const importPosition = data.indexOf('// autoImport');
+      const modifiedContent = data.slice(0, importPosition) + newImport + '\n' + data.slice(importPosition);
+
+      const routesPosition = modifiedContent.indexOf('// autoRoute');
+      const modifiedContentWithRoute = modifiedContent.slice(0, routesPosition) + '\n' + newRoute + modifiedContent.slice(routesPosition);
+
+      fsAr.writeFile(filePath, modifiedContentWithRoute, 'utf8', (err) => {
+        if (err) {
+          console.error('Error writing file:', err);
+          return;
+        }
+        console.log('Route added successfully!');
+      });
+    });
+
+  }
 }

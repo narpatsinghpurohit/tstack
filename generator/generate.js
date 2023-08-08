@@ -1,4 +1,3 @@
-const { Select, Input } = require('enquirer');
 const prompts = require('./prompts'); 
 const utils = require('./utils');
 
@@ -14,6 +13,13 @@ initPrompt.run().then(answer => {
                     prompts.selectLayout(layouts).run().then(layout => {
                         if(utils.createPage(pageName, layout)){
                             console.log(`${pageName} page has been created successfully.`);
+                            prompts.askForRoute().run().then(routeResponse => {
+                                if(routeResponse === 'Yes'){
+                                    prompts.askForRoutePath().run().then(pathName => {
+                                        utils.createRoute(pageName, pathName);
+                                    }).catch(console.error())
+                                }
+                            }).catch(console.error())
                         }else{
                             console.log("Something went wrong")
                         }
