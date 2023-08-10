@@ -11,17 +11,14 @@ import { Box, Typography, Button } from '@mui/material'
 // UI
 const SignUp = (props: Props) => {
   // Getting data from Controller Start
-  const {
-    exampleState,
-    handleExampleStateChange
-  } = SignUpController(props);
+  const instance = SignUpController(props);
   // Getting data from Controller End
   return (
     <Box
       sx={styles.MainBox}
     >
-      <Typography sx={styles.ExampleText}>Example State Value: {exampleState}</Typography>
-      <Button sx={styles.ExampleButton} onClick={handleExampleStateChange}>Change Example State</Button>
+      <Typography sx={styles.ExampleText}>Example State Value: {instance.exampleState}</Typography>
+      <Button sx={styles.ExampleButton} onClick={instance.handleExampleStateChange}>Change Example State</Button>
     </Box>
   );
 };
