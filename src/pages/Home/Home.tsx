@@ -4,8 +4,8 @@ import HomeController, { Props } from './HomeController';
 import { Grid, TextField, Typography } from '@mui/material'
 import OutlinedButton from '../../components/Button/OutlinedButton';
 import styles from './Home.styles';
-import { __ } from '../../common/i18/i18';
-import withLayout from '../../common/utilities/LayoutWrapper/withLayout';
+import { __ } from '../../lang/i18';
+import withLayout from '../../utilities/LayoutWrapper/withLayout';
 import MainLayout from '../../layouts/MainLayout';
 // Custom Imports End
 
@@ -13,11 +13,7 @@ import MainLayout from '../../layouts/MainLayout';
 // UI
 const Home = (props: Props) => {
   // Getting data from Controller Start
-  const {
-    email,
-    handleEmailChange,
-    handleSubmit
-  } = HomeController(props);
+  const instance = HomeController(props);
   // Getting data from Controller End
 
   return (
@@ -33,14 +29,14 @@ const Home = (props: Props) => {
       <Grid item xs={12} sx={styles.FormContainer}>
         <TextField
           type={'email'}
-          value={email}
+          value={instance.email}
           placeholder={__("Home.emailPlaceholder")}
           label={__("Home.emailLabel")}
-          onChange={handleEmailChange}
+          onChange={instance.handleEmailChange}
           sx={styles.EmailInput}
         />
         {/* Custom component example */}
-        <OutlinedButton sx={styles.SubmitButton} buttonText={__("common.submit")} onClick={handleSubmit} />
+        <OutlinedButton sx={styles.SubmitButton} buttonText={__("common.submit")} onClick={instance.handleSubmit} />
       </Grid>
     </Grid>
   )

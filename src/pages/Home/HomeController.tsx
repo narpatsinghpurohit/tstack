@@ -25,13 +25,17 @@ const HomeController = (props: Props) => {
     const handleSubmit = () => {
         props.navigate('sign-up')
     }
+    const handleSomething = () => {
+
+    }
     // Custom logic End
 
     // Exporting states and logic
     return {
         email,
         handleEmailChange,
-        handleSubmit
+        handleSubmit,
+        handleSomething
     };
 };
 

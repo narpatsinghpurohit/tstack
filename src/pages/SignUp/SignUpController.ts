@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { generateRandomString } from '../../common/utilities/toolkit';
+import { generateRandomString } from '../../utilities/toolkit';
 
 export type Props = {
   navigate: any,
