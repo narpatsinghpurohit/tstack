@@ -1,0 +1,10 @@
+{
+    "Home":{
+        "title":"होम पेज",
+        "emailPlaceholder":"ईमेल पता दर्ज करें",
+        "emailLabel":"ईमेल पता"
+    },
+    "common":{
+        "submit":"जमा करना"
+    }
+}
