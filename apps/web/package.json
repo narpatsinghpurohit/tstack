@@ -1,0 +1,49 @@
+{
+	"name": "@tstack/web",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc -b && vite build",
+		"lint": "biome check src/",
+		"preview": "vite preview",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"type-check": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@hookform/resolvers": "^3.9.0",
+		"@tanstack/react-query": "^5.62.0",
+		"@tanstack/react-router": "^1.93.0",
+		"@tstack/shared": "workspace:*",
+		"axios": "^1.7.0",
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.1.0",
+		"lucide-react": "^0.460.0",
+		"react": "^19.2.4",
+		"react-dom": "^19.2.4",
+		"react-hook-form": "^7.54.0",
+		"sonner": "^1.7.0",
+		"tailwind-merge": "^2.6.0",
+		"zod": "^3.24.0",
+		"zustand": "^5.0.0"
+	},
+	"devDependencies": {
+		"@tanstack/router-plugin": "^1.93.0",
+		"@tailwindcss/vite": "^4.0.0",
+		"@testing-library/jest-dom": "^6.6.0",
+		"@testing-library/react": "^16.1.0",
+		"@testing-library/user-event": "^14.5.0",
+		"@types/node": "^24.12.0",
+		"@types/react": "^19.2.14",
+		"@types/react-dom": "^19.2.3",
+		"@vitejs/plugin-react": "^6.0.1",
+		"happy-dom": "^15.0.0",
+		"msw": "^2.7.0",
+		"tailwindcss": "^4.0.0",
+		"typescript": "~5.9.3",
+		"vite": "^8.0.1",
+		"vitest": "^2.1.0"
+	}
+}
