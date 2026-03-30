@@ -8,8 +8,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
-import { useCreateInvitation } from "@/features/org/api/use-invitations";
 import { extractErrorMessage } from "@/lib/api-errors";
+import { useCreateInvitation } from "../use-invitations";
 
 export function InviteMemberDialog({
 	open,

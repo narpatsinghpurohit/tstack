@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
+import { Login } from "@/features/login";
 import { getSession } from "@/features/auth/lib/session-storage";
-import { LoginForm } from "@/features/auth/components/login-form";
 
 export const Route = createFileRoute("/login")({
 	beforeLoad: () => {
@@ -9,15 +9,5 @@ export const Route = createFileRoute("/login")({
 			throw redirect({ to: "/dashboard" });
 		}
 	},
-	component: LoginPage,
+	component: Login,
 });
-
-function LoginPage() {
-	return (
-		<div className="flex min-h-screen items-center justify-center bg-background p-4">
-			<div className="w-full max-w-md">
-				<LoginForm />
-			</div>
-		</div>
-	);
-}

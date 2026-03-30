@@ -188,8 +188,8 @@ export class AuthService {
 		const slug = await this.generateSlug(dto.orgName);
 
 		const session = await this.connection.startSession();
-		let userId: string;
-		let orgId: string;
+		let userId = "";
+		let orgId = "";
 
 		try {
 			await session.withTransaction(async () => {
