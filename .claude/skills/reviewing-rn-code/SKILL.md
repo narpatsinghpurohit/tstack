@@ -31,7 +31,7 @@ allowed-tools: Read, Grep, Glob
 - [ ] NativeWind className (not inline styles or StyleSheet in views)
 - [ ] No web APIs (localStorage, window, document)
 - [ ] SafeAreaView on screen roots
-- [ ] KeyboardAvoidingView on form screens
+- [ ] KeyboardAwareScrollView (from react-native-keyboard-controller) on form screens — NOT KeyboardAvoidingView
 - [ ] Typed navigation params
 - [ ] accessibilityLabel on all interactive elements
 - [ ] Permission gating with useCan

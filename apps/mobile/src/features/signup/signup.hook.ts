@@ -1,13 +1,18 @@
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { LoginResponse, SignupRequestDto } from "@tstack/shared";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { apiClient } from "../../lib/api-client";
-import { setStoredSession } from "../../lib/session-storage";
-import { useAuthStore } from "../../stores/use-auth-store";
+import { apiClient } from "@/lib/api-client";
+import { setStoredSession } from "@/lib/session-storage";
+import type { AuthStackParamList } from "@/navigation/types";
+import { useAuthStore } from "@/stores/use-auth-store";
 
 export type SignupViewProps = ReturnType<typeof useSignup>;
 
 export function useSignup() {
+	const navigation =
+		useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
 	const setSession = useAuthStore((s) => s.setSession);
 	const [isLoading, setIsLoading] = useState(false);
 	const [firstName, setFirstName] = useState("");
@@ -67,5 +72,6 @@ export function useSignup() {
 		onPasswordChange: setPassword,
 		onOrgNameChange: setOrgName,
 		onSignup: handleSignup,
+		onGoToLogin: () => navigation.navigate("Login"),
 	};
 }

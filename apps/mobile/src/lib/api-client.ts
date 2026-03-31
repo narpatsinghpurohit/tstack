@@ -1,17 +1,11 @@
 import axios from "axios";
-import { Platform } from "react-native";
 import {
 	clearStoredSession,
 	getStoredSession,
 	updateStoredTokens,
 } from "./session-storage";
 
-// Android emulator uses 10.0.2.2 to reach host machine's localhost
-const API_URL = Platform.select({
-	android: "http://10.0.2.2:8000/api",
-	ios: "http://localhost:8000/api",
-	default: "http://localhost:8000/api",
-})!;
+const API_URL = "http://10.29.198.137:8000/api";
 
 export const apiClient = axios.create({
 	baseURL: API_URL,

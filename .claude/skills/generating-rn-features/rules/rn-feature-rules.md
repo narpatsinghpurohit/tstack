@@ -147,3 +147,41 @@ Use semantic tokens from shadcn theme. Never hardcode colors.
 // GOOD
 <View className="bg-background">
 ```
+
+## Keyboard Handling
+
+## KB-1: Never use KeyboardAvoidingView
+Use `KeyboardAwareScrollView` from `react-native-keyboard-controller`. The built-in `KeyboardAvoidingView` is unreliable — especially on Android/Samsung.
+```tsx
+// BAD
+import { KeyboardAvoidingView } from "react-native";
+<KeyboardAvoidingView behavior="padding">
+
+// GOOD
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+<KeyboardAwareScrollView bottomOffset={20} keyboardShouldPersistTaps="handled">
+```
+
+## KB-2: KeyboardProvider must wrap the app root
+`KeyboardProvider` with `statusBarTranslucent` and `navigationBarTranslucent` must be the outermost provider in `App.tsx`. Without it, `KeyboardAwareScrollView` silently does nothing.
+```tsx
+<KeyboardProvider statusBarTranslucent navigationBarTranslucent>
+  <SafeAreaProvider>
+    {/* rest of app */}
+  </SafeAreaProvider>
+</KeyboardProvider>
+```
+
+## KB-3: AndroidManifest must use adjustResize
+`android:windowSoftInputMode="adjustResize"` in `AndroidManifest.xml`. Never `adjustNothing` or `adjustPan`.
+
+## KB-4: Clean build after adding keyboard-controller
+The library has native code. After installing, always:
+```bash
+cd android && ./gradlew clean && cd ..
+bun run android
+```
+Stale native caches cause the library to silently fail.
+
+## KB-5: Samsung devices need New Architecture
+Samsung S23+ devices require `newArchEnabled=true` in `gradle.properties`. Without it, `KeyboardAwareScrollView` does not adjust on Samsung.

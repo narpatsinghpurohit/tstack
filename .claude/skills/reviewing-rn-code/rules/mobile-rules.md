@@ -108,3 +108,14 @@ Extract style/config objects outside the component. Inline objects cause re-rend
 
 ## PERF-4: Reanimated for animations
 Use `react-native-reanimated` for native-quality animations. Never `Animated` API from RN core.
+
+## Keyboard Handling
+
+## KB-1: Never use KeyboardAvoidingView
+Use `KeyboardAwareScrollView` from `react-native-keyboard-controller`. Built-in `KeyboardAvoidingView` is unreliable on Android/Samsung.
+
+## KB-2: KeyboardProvider at app root
+`KeyboardProvider` with `statusBarTranslucent` and `navigationBarTranslucent` must wrap the entire app. Without it, keyboard handling silently fails.
+
+## KB-3: adjustResize in AndroidManifest
+`android:windowSoftInputMode="adjustResize"`. Never `adjustNothing` or `adjustPan`.

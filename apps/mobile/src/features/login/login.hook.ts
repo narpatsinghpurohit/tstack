@@ -1,13 +1,18 @@
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { LoginRequestDto, LoginResponse } from "@tstack/shared";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { apiClient } from "../../lib/api-client";
-import { setStoredSession } from "../../lib/session-storage";
-import { useAuthStore } from "../../stores/use-auth-store";
+import { apiClient } from "@/lib/api-client";
+import { setStoredSession } from "@/lib/session-storage";
+import type { AuthStackParamList } from "@/navigation/types";
+import { useAuthStore } from "@/stores/use-auth-store";
 
 export type LoginViewProps = ReturnType<typeof useLogin>;
 
 export function useLogin() {
+	const navigation =
+		useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
 	const setSession = useAuthStore((s) => s.setSession);
 	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
@@ -49,5 +54,7 @@ export function useLogin() {
 		onEmailChange: setEmail,
 		onPasswordChange: setPassword,
 		onLogin: handleLogin,
+		onGoToSignup: () => navigation.navigate("Signup"),
+		onGoToForgotPassword: () => navigation.navigate("ForgotPassword"),
 	};
 }

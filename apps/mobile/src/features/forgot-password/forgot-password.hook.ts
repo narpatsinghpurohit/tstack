@@ -1,10 +1,15 @@
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { apiClient } from "../../lib/api-client";
+import { apiClient } from "@/lib/api-client";
+import type { AuthStackParamList } from "@/navigation/types";
 
 export type ForgotPasswordViewProps = ReturnType<typeof useForgotPassword>;
 
 export function useForgotPassword() {
+	const navigation =
+		useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
 	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
 	const [isSubmitted, setIsSubmitted] = useState(false);
@@ -37,5 +42,6 @@ export function useForgotPassword() {
 		isSubmitted,
 		onEmailChange: setEmail,
 		onSubmit: handleSubmit,
+		onGoToLogin: () => navigation.navigate("Login"),
 	};
 }

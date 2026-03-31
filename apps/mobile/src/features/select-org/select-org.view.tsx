@@ -1,6 +1,8 @@
 import type { OrgMembership } from "@tstack/shared";
-import { ActivityIndicator, FlatList, Pressable, Text } from "react-native";
+import { ActivityIndicator, FlatList, Pressable, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Card, CardContent } from "@/components/ui/card";
+import { Text } from "@/components/ui/text";
 import type { SelectOrgViewProps } from "./select-org.hook";
 
 export function SelectOrgView({
@@ -13,60 +15,40 @@ export function SelectOrgView({
 			onPress={() => onSelectOrg(item.orgId)}
 			accessibilityLabel={`Select ${item.orgName}`}
 			accessibilityRole="button"
-			style={{
-				padding: 16,
-				borderWidth: 1,
-				borderColor: "#e5e7eb",
-				borderRadius: 8,
-				marginBottom: 12,
-			}}
 		>
-			<Text style={{ fontSize: 16, fontWeight: "600" }}>{item.orgName}</Text>
-			<Text style={{ fontSize: 13, color: "#6b7280", marginTop: 4 }}>
-				{item.roleNames.join(", ")}
-			</Text>
+			<Card className="mb-3">
+				<CardContent className="p-4">
+					<Text className="text-base font-semibold">{item.orgName}</Text>
+					<Text className="text-sm text-muted-foreground mt-1">
+						{item.roleNames.join(", ")}
+					</Text>
+				</CardContent>
+			</Card>
 		</Pressable>
 	);
 
 	return (
-		<SafeAreaView
-			style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 24 }}
-		>
-			<Text
-				style={{
-					fontSize: 28,
-					fontWeight: "bold",
-					marginTop: 32,
-					marginBottom: 8,
-					textAlign: "center",
-				}}
-			>
+		<SafeAreaView className="flex-1 bg-background px-6">
+			<Text className="text-3xl font-bold text-center mt-8 mb-2">
 				Select organization
 			</Text>
-			<Text
-				style={{
-					fontSize: 14,
-					color: "#6b7280",
-					marginBottom: 32,
-					textAlign: "center",
-				}}
-			>
+			<Text className="text-sm text-muted-foreground text-center mb-8">
 				Choose which organization to work in
 			</Text>
 
 			{isLoading ? (
-				<ActivityIndicator size="large" style={{ marginTop: 32 }} />
+				<ActivityIndicator size="large" className="mt-8" />
 			) : (
 				<FlatList
 					data={memberships}
 					keyExtractor={(item) => item.orgId}
 					renderItem={renderItem}
 					ListEmptyComponent={
-						<Text
-							style={{ textAlign: "center", color: "#9ca3af", marginTop: 32 }}
-						>
-							No organizations found
-						</Text>
+						<View className="items-center mt-8">
+							<Text className="text-muted-foreground">
+								No organizations found
+							</Text>
+						</View>
 					}
 				/>
 			)}
