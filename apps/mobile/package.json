@@ -22,7 +22,7 @@
 		"@rn-primitives/slot": "^1.4.0",
 		"@tanstack/react-query": "^5.0.0",
 		"@tstack/shared": "workspace:*",
-		"axios": "^1.7.0",
+		"axios": "1.14.0",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"nativewind": "^4.2.3",
