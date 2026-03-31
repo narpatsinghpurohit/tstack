@@ -7,9 +7,12 @@ import {
 	Patch,
 	Post,
 } from "@nestjs/common";
-import { PERMISSIONS } from "@tstack/shared";
 import type { CreateRoleDto, UpdateRoleDto } from "@tstack/shared";
-import { createRoleSchema, updateRoleSchema } from "@tstack/shared";
+import {
+	createRoleSchema,
+	PERMISSIONS,
+	updateRoleSchema,
+} from "@tstack/shared";
 import { Can } from "../../common/decorators/can.decorator";
 import { ZodValidationPipe } from "../../common/validation/zod-validation.pipe";
 import { RoleService } from "./role.service";

@@ -1,6 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { ResetPasswordViewProps } from "./reset-password.hook";
@@ -24,7 +31,10 @@ export function ResetPasswordView({
 							</CardDescription>
 						</CardHeader>
 						<CardFooter className="justify-center">
-							<Link to="/login" className="text-sm text-primary hover:underline">
+							<Link
+								to="/login"
+								className="text-sm text-primary hover:underline"
+							>
 								Back to login
 							</Link>
 						</CardFooter>
@@ -73,11 +83,7 @@ export function ResetPasswordView({
 							</div>
 						</CardContent>
 						<CardFooter className="flex flex-col gap-4">
-							<Button
-								type="submit"
-								className="w-full"
-								disabled={isPending}
-							>
+							<Button type="submit" className="w-full" disabled={isPending}>
 								{isPending ? "Resetting..." : "Reset password"}
 							</Button>
 							<Link

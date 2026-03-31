@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import * as nodemailer from "nodemailer";
 import type { Transporter } from "nodemailer";
+import * as nodemailer from "nodemailer";
 
 @Injectable()
 export class EmailService {
@@ -18,18 +18,11 @@ export class EmailService {
 			host,
 			port,
 			secure: port === 465,
-			auth:
-				user && pass
-					? { user, pass }
-					: undefined,
+			auth: user && pass ? { user, pass } : undefined,
 		});
 	}
 
-	async sendEmail(
-		to: string,
-		subject: string,
-		html: string,
-	): Promise<void> {
+	async sendEmail(to: string, subject: string, html: string): Promise<void> {
 		const from = this.configService.get<string>(
 			"email.SMTP_FROM_EMAIL",
 			"noreply@tstack.app",
@@ -87,10 +80,6 @@ export class EmailService {
 			<p>This invitation expires in 7 days.</p>
 		`;
 
-		await this.sendEmail(
-			to,
-			`Invitation to join ${orgName}`,
-			html,
-		);
+		await this.sendEmail(to, `Invitation to join ${orgName}`, html);
 	}
 }

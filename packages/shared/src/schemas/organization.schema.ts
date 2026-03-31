@@ -14,7 +14,9 @@ export type UpdateOrganizationDto = z.infer<typeof updateOrganizationSchema>;
 export const updateOrganizationStatusSchema = z.object({
 	status: z.enum(["active", "suspended", "inactive"]),
 });
-export type UpdateOrganizationStatusDto = z.infer<typeof updateOrganizationStatusSchema>;
+export type UpdateOrganizationStatusDto = z.infer<
+	typeof updateOrganizationStatusSchema
+>;
 
 export const organizationResponseSchema = z.object({
 	_id: z.string(),

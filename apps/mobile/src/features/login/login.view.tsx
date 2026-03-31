@@ -5,7 +5,6 @@ import {
 	Pressable,
 	Text,
 	TextInput,
-	View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { LoginViewProps } from "./login.hook";
@@ -24,14 +23,30 @@ export function LoginView({
 				behavior={Platform.OS === "ios" ? "padding" : "height"}
 				style={{ flex: 1, justifyContent: "center", paddingHorizontal: 24 }}
 			>
-				<Text style={{ fontSize: 28, fontWeight: "bold", marginBottom: 8, textAlign: "center" }}>
+				<Text
+					style={{
+						fontSize: 28,
+						fontWeight: "bold",
+						marginBottom: 8,
+						textAlign: "center",
+					}}
+				>
 					Welcome back
 				</Text>
-				<Text style={{ fontSize: 14, color: "#6b7280", marginBottom: 32, textAlign: "center" }}>
+				<Text
+					style={{
+						fontSize: 14,
+						color: "#6b7280",
+						marginBottom: 32,
+						textAlign: "center",
+					}}
+				>
 					Sign in to your account
 				</Text>
 
-				<Text style={{ fontSize: 14, fontWeight: "500", marginBottom: 6 }}>Email</Text>
+				<Text style={{ fontSize: 14, fontWeight: "500", marginBottom: 6 }}>
+					Email
+				</Text>
 				<TextInput
 					value={email}
 					onChangeText={onEmailChange}
@@ -50,7 +65,9 @@ export function LoginView({
 					}}
 				/>
 
-				<Text style={{ fontSize: 14, fontWeight: "500", marginBottom: 6 }}>Password</Text>
+				<Text style={{ fontSize: 14, fontWeight: "500", marginBottom: 6 }}>
+					Password
+				</Text>
 				<TextInput
 					value={password}
 					onChangeText={onPasswordChange}
@@ -82,7 +99,9 @@ export function LoginView({
 					{isLoading ? (
 						<ActivityIndicator color="#fff" />
 					) : (
-						<Text style={{ color: "#fff", fontWeight: "600", fontSize: 16 }}>Sign in</Text>
+						<Text style={{ color: "#fff", fontWeight: "600", fontSize: 16 }}>
+							Sign in
+						</Text>
 					)}
 				</Pressable>
 			</KeyboardAvoidingView>

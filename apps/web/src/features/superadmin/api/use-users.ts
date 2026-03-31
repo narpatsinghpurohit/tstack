@@ -1,6 +1,11 @@
-import type { CreateUserDto, UpdateUserInfoDto, UpdateUserRolesDto, UserResponse } from "@tstack/shared";
-import type { PaginatedResponse } from "@tstack/shared";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type {
+	CreateUserDto,
+	PaginatedResponse,
+	UpdateUserInfoDto,
+	UpdateUserRolesDto,
+	UserResponse,
+} from "@tstack/shared";
 import { apiClient } from "@/lib/api-client";
 
 interface UserListParams {
@@ -11,7 +16,8 @@ interface UserListParams {
 
 export const adminUserKeys = {
 	all: ["admin", "users"] as const,
-	list: (params: UserListParams) => [...adminUserKeys.all, "list", params] as const,
+	list: (params: UserListParams) =>
+		[...adminUserKeys.all, "list", params] as const,
 	detail: (id: string) => [...adminUserKeys.all, "detail", id] as const,
 };
 
@@ -19,7 +25,10 @@ export function useAdminUsers(params: UserListParams = {}) {
 	return useQuery({
 		queryKey: adminUserKeys.list(params),
 		queryFn: async () => {
-			const r = await apiClient.get<{ data: PaginatedResponse<UserResponse> }>("/admin/users", { params });
+			const r = await apiClient.get<{ data: PaginatedResponse<UserResponse> }>(
+				"/admin/users",
+				{ params },
+			);
 			return r.data.data;
 		},
 	});
@@ -29,7 +38,9 @@ export function useAdminUser(id: string) {
 	return useQuery({
 		queryKey: adminUserKeys.detail(id),
 		queryFn: async () => {
-			const r = await apiClient.get<{ data: UserResponse }>(`/admin/users/${id}`);
+			const r = await apiClient.get<{ data: UserResponse }>(
+				`/admin/users/${id}`,
+			);
 			return r.data.data;
 		},
 		enabled: !!id,
@@ -40,7 +51,10 @@ export function useAdminCreateUser() {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: async (data: CreateUserDto) => {
-			const r = await apiClient.post<{ data: UserResponse }>("/admin/users", data);
+			const r = await apiClient.post<{ data: UserResponse }>(
+				"/admin/users",
+				data,
+			);
 			return r.data.data;
 		},
 		onSuccess: () => {
@@ -52,8 +66,17 @@ export function useAdminCreateUser() {
 export function useAdminUpdateUser() {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: async ({ id, data }: { id: string; data: UpdateUserInfoDto }) => {
-			const r = await apiClient.patch<{ data: UserResponse }>(`/admin/users/${id}`, data);
+		mutationFn: async ({
+			id,
+			data,
+		}: {
+			id: string;
+			data: UpdateUserInfoDto;
+		}) => {
+			const r = await apiClient.patch<{ data: UserResponse }>(
+				`/admin/users/${id}`,
+				data,
+			);
 			return r.data.data;
 		},
 		onSuccess: () => {
@@ -65,8 +88,17 @@ export function useAdminUpdateUser() {
 export function useAdminUpdateUserRoles() {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: async ({ id, data }: { id: string; data: UpdateUserRolesDto }) => {
-			const r = await apiClient.patch<{ data: UserResponse }>(`/admin/users/${id}/roles`, data);
+		mutationFn: async ({
+			id,
+			data,
+		}: {
+			id: string;
+			data: UpdateUserRolesDto;
+		}) => {
+			const r = await apiClient.patch<{ data: UserResponse }>(
+				`/admin/users/${id}/roles`,
+				data,
+			);
 			return r.data.data;
 		},
 		onSuccess: () => {

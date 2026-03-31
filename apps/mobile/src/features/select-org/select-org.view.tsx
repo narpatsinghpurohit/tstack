@@ -1,9 +1,13 @@
-import { FlatList, Pressable, Text, View, ActivityIndicator } from "react-native";
+import type { OrgMembership } from "@tstack/shared";
+import { ActivityIndicator, FlatList, Pressable, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { SelectOrgViewProps } from "./select-org.hook";
-import type { OrgMembership } from "@tstack/shared";
 
-export function SelectOrgView({ memberships, isLoading, onSelectOrg }: SelectOrgViewProps) {
+export function SelectOrgView({
+	memberships,
+	isLoading,
+	onSelectOrg,
+}: SelectOrgViewProps) {
 	const renderItem = ({ item }: { item: OrgMembership }) => (
 		<Pressable
 			onPress={() => onSelectOrg(item.orgId)}
@@ -25,11 +29,28 @@ export function SelectOrgView({ memberships, isLoading, onSelectOrg }: SelectOrg
 	);
 
 	return (
-		<SafeAreaView style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 24 }}>
-			<Text style={{ fontSize: 28, fontWeight: "bold", marginTop: 32, marginBottom: 8, textAlign: "center" }}>
+		<SafeAreaView
+			style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 24 }}
+		>
+			<Text
+				style={{
+					fontSize: 28,
+					fontWeight: "bold",
+					marginTop: 32,
+					marginBottom: 8,
+					textAlign: "center",
+				}}
+			>
 				Select organization
 			</Text>
-			<Text style={{ fontSize: 14, color: "#6b7280", marginBottom: 32, textAlign: "center" }}>
+			<Text
+				style={{
+					fontSize: 14,
+					color: "#6b7280",
+					marginBottom: 32,
+					textAlign: "center",
+				}}
+			>
 				Choose which organization to work in
 			</Text>
 
@@ -41,7 +62,9 @@ export function SelectOrgView({ memberships, isLoading, onSelectOrg }: SelectOrg
 					keyExtractor={(item) => item.orgId}
 					renderItem={renderItem}
 					ListEmptyComponent={
-						<Text style={{ textAlign: "center", color: "#9ca3af", marginTop: 32 }}>
+						<Text
+							style={{ textAlign: "center", color: "#9ca3af", marginTop: 32 }}
+						>
 							No organizations found
 						</Text>
 					}

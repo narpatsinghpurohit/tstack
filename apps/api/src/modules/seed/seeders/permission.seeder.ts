@@ -7,9 +7,7 @@ import type { Seeder } from "../seeder.interface";
 export class PermissionSeeder implements Seeder {
 	private readonly logger = new Logger(PermissionSeeder.name);
 
-	constructor(
-		private readonly permissionRepository: PermissionRepository,
-	) {}
+	constructor(private readonly permissionRepository: PermissionRepository) {}
 
 	async run(_fresh: boolean): Promise<void> {
 		this.logger.log("Seeding permissions...");
@@ -22,8 +20,6 @@ export class PermissionSeeder implements Seeder {
 			});
 		}
 
-		this.logger.log(
-			`Seeded ${PERMISSION_DEFINITIONS.length} permissions`,
-		);
+		this.logger.log(`Seeded ${PERMISSION_DEFINITIONS.length} permissions`);
 	}
 }

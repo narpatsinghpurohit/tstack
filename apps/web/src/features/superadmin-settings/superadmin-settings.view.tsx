@@ -28,9 +28,7 @@ export function SuperadminSettingsView({
 	return (
 		<div className="space-y-6">
 			<div>
-				<h1 className="text-3xl font-bold tracking-tight">
-					System Settings
-				</h1>
+				<h1 className="text-3xl font-bold tracking-tight">System Settings</h1>
 				<p className="text-muted-foreground">
 					Configure platform-wide settings
 				</p>
@@ -49,9 +47,7 @@ export function SuperadminSettingsView({
 						<Input
 							id="platformName"
 							value={platformName}
-							onChange={(e) =>
-								onChange("platformName", e.target.value)
-							}
+							onChange={(e) => onChange("platformName", e.target.value)}
 						/>
 					</div>
 					<div className="space-y-2">
@@ -60,9 +56,7 @@ export function SuperadminSettingsView({
 							id="supportEmail"
 							type="email"
 							value={supportEmail}
-							onChange={(e) =>
-								onChange("supportEmail", e.target.value)
-							}
+							onChange={(e) => onChange("supportEmail", e.target.value)}
 						/>
 					</div>
 					<div className="flex items-center gap-3">
@@ -70,9 +64,7 @@ export function SuperadminSettingsView({
 							type="checkbox"
 							id="allowSignup"
 							checked={allowSignup}
-							onChange={(e) =>
-								onChange("allowSignup", e.target.checked)
-							}
+							onChange={(e) => onChange("allowSignup", e.target.checked)}
 							className="rounded border-input"
 						/>
 						<Label htmlFor="allowSignup">Allow public signup</Label>
@@ -82,17 +74,12 @@ export function SuperadminSettingsView({
 							type="checkbox"
 							id="maintenanceMode"
 							checked={maintenanceMode}
-							onChange={(e) =>
-								onChange("maintenanceMode", e.target.checked)
-							}
+							onChange={(e) => onChange("maintenanceMode", e.target.checked)}
 							className="rounded border-input"
 						/>
 						<Label htmlFor="maintenanceMode">Maintenance mode</Label>
 					</div>
-					<Button
-						onClick={onSave}
-						disabled={!hasEdits || isSaving}
-					>
+					<Button onClick={onSave} disabled={!hasEdits || isSaving}>
 						{isSaving ? "Saving..." : "Save Settings"}
 					</Button>
 				</CardContent>

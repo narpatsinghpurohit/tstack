@@ -25,12 +25,8 @@ export function SuperadminDashboardView({ sections }: ViewProps) {
 								<div className="flex items-center gap-3">
 									<section.icon className="h-5 w-5 text-muted-foreground" />
 									<div>
-										<CardTitle className="text-lg">
-											{section.title}
-										</CardTitle>
-										<CardDescription>
-											{section.description}
-										</CardDescription>
+										<CardTitle className="text-lg">{section.title}</CardTitle>
+										<CardDescription>{section.description}</CardDescription>
 									</div>
 								</div>
 							</CardHeader>

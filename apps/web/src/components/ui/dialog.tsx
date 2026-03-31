@@ -1,12 +1,12 @@
+import { X } from "lucide-react";
 import {
 	type ComponentPropsWithoutRef,
-	type HTMLAttributes,
 	createContext,
+	type HTMLAttributes,
 	useCallback,
 	useContext,
 	useState,
 } from "react";
-import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface DialogContextValue {
@@ -68,12 +68,11 @@ export function DialogContent({
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center">
-			<div
-				className="fixed inset-0 bg-black/80"
+			<button
+				type="button"
+				className="fixed inset-0 bg-black/80 cursor-default"
 				onClick={() => setOpen(false)}
-				onKeyDown={(e) => {
-					if (e.key === "Escape") setOpen(false);
-				}}
+				aria-label="Close dialog"
 			/>
 			<div
 				className={cn(

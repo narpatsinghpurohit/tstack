@@ -15,5 +15,4 @@ export class SystemSetting {
 	updatedAt: Date;
 }
 
-export const SystemSettingSchema =
-	SchemaFactory.createForClass(SystemSetting);
+export const SystemSettingSchema = SchemaFactory.createForClass(SystemSetting);

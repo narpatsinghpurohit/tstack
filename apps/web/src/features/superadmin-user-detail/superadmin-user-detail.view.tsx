@@ -60,9 +60,7 @@ export function SuperadminUserDetailView({
 						<div className="flex justify-between">
 							<span className="text-sm text-muted-foreground">Status</span>
 							<Badge
-								variant={
-									user.status === "active" ? "default" : "destructive"
-								}
+								variant={user.status === "active" ? "default" : "destructive"}
 							>
 								{user.status}
 							</Badge>
@@ -79,9 +77,7 @@ export function SuperadminUserDetailView({
 				<Card>
 					<CardHeader>
 						<CardTitle>Roles & Status</CardTitle>
-						<CardDescription>
-							Manage user roles and status
-						</CardDescription>
+						<CardDescription>Manage user roles and status</CardDescription>
 					</CardHeader>
 					<CardContent className="space-y-4">
 						<div>
@@ -105,9 +101,7 @@ export function SuperadminUserDetailView({
 							<Select
 								value={user.status}
 								onChange={(e) =>
-									onStatusChange(
-										e.target.value as "active" | "inactive",
-									)
+									onStatusChange(e.target.value as "active" | "inactive")
 								}
 								disabled={isUpdatePending}
 							>

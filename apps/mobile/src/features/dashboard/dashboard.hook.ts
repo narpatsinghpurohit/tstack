@@ -1,5 +1,5 @@
-import { useAuthStore } from "../../stores/use-auth-store";
 import { clearStoredSession } from "../../lib/session-storage";
+import { useAuthStore } from "../../stores/use-auth-store";
 
 export type DashboardViewProps = ReturnType<typeof useDashboard>;
 
@@ -13,7 +13,9 @@ export function useDashboard() {
 	};
 
 	return {
-		userName: session ? `${session.user.firstName} ${session.user.lastName}` : "",
+		userName: session
+			? `${session.user.firstName} ${session.user.lastName}`
+			: "",
 		orgName: session?.user.orgName ?? "No organization",
 		email: session?.user.email ?? "",
 		onLogout: handleLogout,

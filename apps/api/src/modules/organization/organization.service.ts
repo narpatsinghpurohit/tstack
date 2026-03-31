@@ -1,7 +1,6 @@
 import {
 	ForbiddenException,
 	Injectable,
-	Logger,
 	NotFoundException,
 } from "@nestjs/common";
 import type {
@@ -13,11 +12,7 @@ import { OrganizationRepository } from "./organization.repository";
 
 @Injectable()
 export class OrganizationService {
-	private readonly logger = new Logger(OrganizationService.name);
-
-	constructor(
-		private readonly orgRepository: OrganizationRepository,
-	) {}
+	constructor(private readonly orgRepository: OrganizationRepository) {}
 
 	async findById(id: string) {
 		const org = await this.orgRepository.findById(id);

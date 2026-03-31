@@ -1,9 +1,9 @@
+import type { LoginRequestDto, LoginResponse } from "@tstack/shared";
 import { useState } from "react";
 import { Alert } from "react-native";
 import { apiClient } from "../../lib/api-client";
 import { setStoredSession } from "../../lib/session-storage";
 import { useAuthStore } from "../../stores/use-auth-store";
-import type { LoginRequestDto, LoginResponse } from "@tstack/shared";
 
 export type LoginViewProps = ReturnType<typeof useLogin>;
 
@@ -21,15 +21,21 @@ export function useLogin() {
 
 		setIsLoading(true);
 		try {
-			const dto: LoginRequestDto = { email: email.trim().toLowerCase(), password };
-			const { data } = await apiClient.post<{ data: LoginResponse }>("/auth/login", dto);
+			const dto: LoginRequestDto = {
+				email: email.trim().toLowerCase(),
+				password,
+			};
+			const { data } = await apiClient.post<{ data: LoginResponse }>(
+				"/auth/login",
+				dto,
+			);
 			const session = data.data;
 			await setStoredSession(session);
 			setSession(session);
 		} catch (error: unknown) {
 			const message =
-				(error as { response?: { data?: { message?: string } } })?.response?.data?.message ??
-				"Login failed. Please try again.";
+				(error as { response?: { data?: { message?: string } } })?.response
+					?.data?.message ?? "Login failed. Please try again.";
 			Alert.alert("Error", message);
 		} finally {
 			setIsLoading(false);

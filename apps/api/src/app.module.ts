@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import { AppController } from "./app.controller";
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 import { JwtModule } from "@nestjs/jwt";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
+import { AppController } from "./app.controller";
 import { HttpExceptionFilter } from "./common/filters/http-exception.filter";
 import { CanGuard } from "./common/guards/can.guard";
 import { JwtAuthGuard } from "./common/guards/jwt-auth.guard";

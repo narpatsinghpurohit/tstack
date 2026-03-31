@@ -1,5 +1,5 @@
-import { LogOut, Settings, User } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
+import { LogOut, Settings, User } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
@@ -21,7 +21,8 @@ export function UserProfileMenu() {
 	if (!session) return null;
 
 	const { user } = session;
-	const initials = `${user.firstName[0] ?? ""}${user.lastName[0] ?? ""}`.toUpperCase();
+	const initials =
+		`${user.firstName[0] ?? ""}${user.lastName[0] ?? ""}`.toUpperCase();
 
 	const handleLogout = async () => {
 		await logout();
@@ -43,7 +44,9 @@ export function UserProfileMenu() {
 			<DropdownMenuContent align="end" className="w-56">
 				<DropdownMenuLabel>
 					<div className="flex flex-col space-y-1">
-						<p className="text-sm font-medium">{user.firstName} {user.lastName}</p>
+						<p className="text-sm font-medium">
+							{user.firstName} {user.lastName}
+						</p>
 						<p className="text-xs text-muted-foreground">{user.email}</p>
 					</div>
 				</DropdownMenuLabel>
@@ -52,7 +55,9 @@ export function UserProfileMenu() {
 					<User className="mr-2 h-4 w-4" />
 					Profile
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => navigate({ to: "/settings/password" })}>
+				<DropdownMenuItem
+					onClick={() => navigate({ to: "/settings/password" })}
+				>
 					<Settings className="mr-2 h-4 w-4" />
 					Settings
 				</DropdownMenuItem>

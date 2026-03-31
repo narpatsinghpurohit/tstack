@@ -54,11 +54,7 @@ export function SuperadminRoleEditorView({
 					<CardContent className="space-y-4">
 						<div className="space-y-2">
 							<Label htmlFor="name">Name</Label>
-							<Input
-								id="name"
-								{...nameRegister}
-								disabled={isDefaultRole}
-							/>
+							<Input id="name" {...nameRegister} disabled={isDefaultRole} />
 							{errors.name ? (
 								<p className="text-sm text-destructive">
 									{errors.name.message}
@@ -76,41 +72,35 @@ export function SuperadminRoleEditorView({
 					<CardHeader>
 						<CardTitle>Permissions</CardTitle>
 						<CardDescription>
-							Select the permissions for this role (
-							{selectedPermissions.length} selected)
+							Select the permissions for this role ({selectedPermissions.length}{" "}
+							selected)
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
 						<div className="space-y-6">
-							{Object.entries(groupedPermissions).map(
-								([group, perms]) => (
-									<div key={group}>
-										<h4 className="mb-2 text-sm font-semibold capitalize">
-											{group}
-										</h4>
-										<div className="grid grid-cols-2 gap-2 md:grid-cols-3">
-											{perms.map((perm) => (
-												<label
-													key={perm}
-													className="flex items-center gap-2 text-sm"
-												>
-													<input
-														type="checkbox"
-														checked={selectedPermissions.includes(
-															perm,
-														)}
-														onChange={() =>
-															onTogglePermission(perm)
-														}
-														className="rounded border-input"
-													/>
-													{perm.split(".")[1]}
-												</label>
-											))}
-										</div>
+							{Object.entries(groupedPermissions).map(([group, perms]) => (
+								<div key={group}>
+									<h4 className="mb-2 text-sm font-semibold capitalize">
+										{group}
+									</h4>
+									<div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+										{perms.map((perm) => (
+											<label
+												key={perm}
+												className="flex items-center gap-2 text-sm"
+											>
+												<input
+													type="checkbox"
+													checked={selectedPermissions.includes(perm)}
+													onChange={() => onTogglePermission(perm)}
+													className="rounded border-input"
+												/>
+												{perm.split(".")[1]}
+											</label>
+										))}
 									</div>
-								),
-							)}
+								</div>
+							))}
 						</div>
 					</CardContent>
 				</Card>

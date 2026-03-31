@@ -1,3 +1,5 @@
+import { Link, useLocation } from "@tanstack/react-router";
+import { PERMISSIONS } from "@tstack/shared";
 import {
 	Building2,
 	KeyRound,
@@ -11,16 +13,14 @@ import {
 	X,
 } from "lucide-react";
 import { useState } from "react";
-import { Link, useLocation } from "@tanstack/react-router";
-import { PERMISSIONS } from "@tstack/shared";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCan } from "@/features/auth/hooks/use-can";
+import { cn } from "@/lib/utils";
 import type { NavGroup, NavItem } from "./nav-config";
 import { mainNav, superadminNav } from "./nav-config";
 import { OrgSwitcher } from "./org-switcher";
 import { UserProfileMenu } from "./user-profile-menu";
-import { cn } from "@/lib/utils";
 
 const iconMap: Record<string, React.ElementType> = {
 	LayoutDashboard,
@@ -109,12 +109,11 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
 		<div className="flex h-screen">
 			{/* Mobile overlay */}
 			{sidebarOpen ? (
-				<div
-					className="fixed inset-0 z-40 bg-black/80 lg:hidden"
+				<button
+					type="button"
+					className="fixed inset-0 z-40 bg-black/80 lg:hidden cursor-default"
 					onClick={() => setSidebarOpen(false)}
-					onKeyDown={(e) => {
-						if (e.key === "Escape") setSidebarOpen(false);
-					}}
+					aria-label="Close navigation"
 				/>
 			) : null}
 

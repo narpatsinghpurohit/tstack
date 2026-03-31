@@ -15,9 +15,7 @@ export function DashboardView({
 		<div className="space-y-6">
 			<div>
 				<h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-				<p className="text-muted-foreground">
-					Welcome back, {firstName}!
-				</p>
+				<p className="text-muted-foreground">Welcome back, {firstName}!</p>
 			</div>
 
 			<div className="grid gap-4 md:grid-cols-3">
@@ -34,9 +32,7 @@ export function DashboardView({
 				</Card>
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-						<CardTitle className="text-sm font-medium">
-							Organizations
-						</CardTitle>
+						<CardTitle className="text-sm font-medium">Organizations</CardTitle>
 						<Users className="h-4 w-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
@@ -45,9 +41,7 @@ export function DashboardView({
 				</Card>
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-						<CardTitle className="text-sm font-medium">
-							Permissions
-						</CardTitle>
+						<CardTitle className="text-sm font-medium">Permissions</CardTitle>
 						<Shield className="h-4 w-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>

@@ -5,11 +5,8 @@ import { OrganizationModule } from "../organization/organization.module";
 import { UserModule } from "../user/user.module";
 import { InvitationController } from "./invitation.controller";
 import { InvitationRepository } from "./invitation.repository";
-import {
-	Invitation,
-	InvitationSchema,
-} from "./schemas/invitation.schema";
 import { InvitationService } from "./invitation.service";
+import { Invitation, InvitationSchema } from "./schemas/invitation.schema";
 
 @Module({
 	imports: [

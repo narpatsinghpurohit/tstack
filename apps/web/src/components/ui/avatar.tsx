@@ -22,6 +22,7 @@ export function AvatarImage({
 }: ImgHTMLAttributes<HTMLImageElement>) {
 	return (
 		<img
+			alt=""
 			className={cn("aspect-square h-full w-full", className)}
 			{...props}
 		/>

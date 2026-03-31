@@ -2,7 +2,6 @@ import {
 	ConflictException,
 	ForbiddenException,
 	Injectable,
-	Logger,
 	NotFoundException,
 } from "@nestjs/common";
 import type { CreateRoleDto, UpdateRoleDto } from "@tstack/shared";
@@ -10,8 +9,6 @@ import { RoleRepository } from "./role.repository";
 
 @Injectable()
 export class RoleService {
-	private readonly logger = new Logger(RoleService.name);
-
 	constructor(private readonly roleRepository: RoleRepository) {}
 
 	async findAll() {

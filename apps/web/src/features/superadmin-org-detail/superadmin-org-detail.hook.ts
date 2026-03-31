@@ -1,5 +1,5 @@
-import type { OrganizationResponse } from "@tstack/shared";
 import { useParams } from "@tanstack/react-router";
+import type { OrganizationResponse } from "@tstack/shared";
 import { toast } from "sonner";
 import {
 	useAdminOrganization,

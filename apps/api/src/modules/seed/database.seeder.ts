@@ -18,9 +18,7 @@ export class DatabaseSeeder {
 	async run(options: { fresh?: boolean; class?: string } = {}): Promise<void> {
 		const fresh = options.fresh ?? false;
 
-		this.logger.log(
-			`Running seeders${fresh ? " (fresh)" : ""}...`,
-		);
+		this.logger.log(`Running seeders${fresh ? " (fresh)" : ""}...`);
 
 		const seeders = [
 			{ name: "PermissionSeeder", instance: this.permissionSeeder },

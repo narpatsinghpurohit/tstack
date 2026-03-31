@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { forgotPasswordRequestSchema } from "@tstack/shared";
-import type { ForgotPasswordRequestDto } from "@tstack/shared";
 import { useMutation } from "@tanstack/react-query";
+import type { ForgotPasswordRequestDto } from "@tstack/shared";
+import { forgotPasswordRequestSchema } from "@tstack/shared";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { forgotPassword } from "@/features/auth/lib/auth-api";

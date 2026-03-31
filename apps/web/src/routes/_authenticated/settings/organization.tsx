@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { OrganizationSettings } from "@/features/organization-settings";
 import { getSession } from "@/features/auth/lib/session-storage";
+import { OrganizationSettings } from "@/features/organization-settings";
 
 export const Route = createFileRoute("/_authenticated/settings/organization")({
 	beforeLoad: () => {

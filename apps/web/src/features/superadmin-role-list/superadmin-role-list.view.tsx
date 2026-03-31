@@ -65,15 +65,11 @@ export function SuperadminRoleListView({
 							<TableBody>
 								{roles.map((role) => (
 									<TableRow key={role._id}>
-										<TableCell className="font-medium">
-											{role.name}
-										</TableCell>
+										<TableCell className="font-medium">{role.name}</TableCell>
 										<TableCell className="text-muted-foreground">
 											{role.description || "-"}
 										</TableCell>
-										<TableCell>
-											{role.permissionNames.length}
-										</TableCell>
+										<TableCell>{role.permissionNames.length}</TableCell>
 										<TableCell>
 											{role.isDefault ? (
 												<Badge variant="secondary">System</Badge>
@@ -83,7 +79,10 @@ export function SuperadminRoleListView({
 										</TableCell>
 										<TableCell>
 											<div className="flex gap-1">
-												<Link to="/superadmin/roles/$roleId" params={{ roleId: role._id }}>
+												<Link
+													to="/superadmin/roles/$roleId"
+													params={{ roleId: role._id }}
+												>
 													<Button variant="ghost" size="icon">
 														<Edit className="h-4 w-4" />
 													</Button>

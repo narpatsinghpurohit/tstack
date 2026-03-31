@@ -9,7 +9,9 @@ export type UpdateSystemSettingDto = z.infer<typeof updateSystemSettingSchema>;
 export const updateSystemSettingsSchema = z.object({
 	settings: z.array(updateSystemSettingSchema),
 });
-export type UpdateSystemSettingsDto = z.infer<typeof updateSystemSettingsSchema>;
+export type UpdateSystemSettingsDto = z.infer<
+	typeof updateSystemSettingsSchema
+>;
 
 export const systemSettingResponseSchema = z.object({
 	_id: z.string(),

@@ -1,7 +1,6 @@
-import { PERMISSIONS } from "@tstack/shared";
-import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { can, PERMISSIONS } from "@tstack/shared";
 import { getSession } from "@/features/auth/lib/session-storage";
-import { can } from "@tstack/shared";
 
 export const Route = createFileRoute("/_authenticated/_superadmin")({
 	beforeLoad: () => {

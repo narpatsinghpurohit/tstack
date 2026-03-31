@@ -1,5 +1,9 @@
 import axios from "axios";
-import { clearSession, getSession, updateTokens } from "@/features/auth/lib/session-storage";
+import {
+	clearSession,
+	getSession,
+	updateTokens,
+} from "@/features/auth/lib/session-storage";
 
 const apiClient = axios.create({
 	baseURL: import.meta.env.VITE_API_URL ?? "http://localhost:8000/api",
@@ -36,7 +40,14 @@ apiClient.interceptors.response.use(
 
 		if (!refreshPromise) {
 			refreshPromise = axios
-				.post<{ data: { accessToken: string; refreshToken: string; accessTokenExpiresAt: string; refreshTokenExpiresAt: string } }>(
+				.post<{
+					data: {
+						accessToken: string;
+						refreshToken: string;
+						accessTokenExpiresAt: string;
+						refreshTokenExpiresAt: string;
+					};
+				}>(
 					`${import.meta.env.VITE_API_URL ?? "http://localhost:8000/api"}/auth/refresh`,
 					{ refreshToken: session.tokens.refreshToken },
 				)

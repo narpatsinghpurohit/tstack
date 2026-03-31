@@ -69,10 +69,7 @@ export class RoleRepository {
 			.exec();
 	}
 
-	async upsertByName(
-		name: string,
-		data: Partial<Role>,
-	): Promise<Role> {
+	async upsertByName(name: string, data: Partial<Role>): Promise<Role> {
 		const doc = await this.roleModel
 			.findOneAndUpdate({ name }, { $set: data }, { upsert: true, new: true })
 			.lean()

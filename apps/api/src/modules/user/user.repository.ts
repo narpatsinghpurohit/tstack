@@ -35,7 +35,11 @@ export class UserRepository {
 
 	async findMany(
 		filter: FilterQuery<User> = {},
-		options: { page?: number; limit?: number; sort?: Record<string, 1 | -1> } = {},
+		options: {
+			page?: number;
+			limit?: number;
+			sort?: Record<string, 1 | -1>;
+		} = {},
 	): Promise<{ data: User[]; total: number }> {
 		const page = options.page ?? 1;
 		const limit = options.limit ?? 20;

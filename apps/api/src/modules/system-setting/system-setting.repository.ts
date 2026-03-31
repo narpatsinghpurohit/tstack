@@ -17,11 +17,9 @@ export class SystemSettingRepository {
 	) {}
 
 	async findAll(): Promise<SystemSetting[]> {
-		return this.settingModel
-			.find()
-			.sort({ key: 1 })
-			.lean()
-			.exec() as Promise<SystemSetting[]>;
+		return this.settingModel.find().sort({ key: 1 }).lean().exec() as Promise<
+			SystemSetting[]
+		>;
 	}
 
 	async findByKey(key: string): Promise<SystemSetting | null> {

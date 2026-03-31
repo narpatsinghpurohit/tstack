@@ -41,9 +41,7 @@ export function SuperadminUserListView({
 					<div className="flex items-center justify-between">
 						<div>
 							<CardTitle>All Users</CardTitle>
-							<CardDescription>
-								{data?.total ?? 0} total users
-							</CardDescription>
+							<CardDescription>{data?.total ?? 0} total users</CardDescription>
 						</div>
 						<Input
 							placeholder="Search..."
@@ -90,9 +88,7 @@ export function SuperadminUserListView({
 											<TableCell>
 												<Badge
 													variant={
-														user.status === "active"
-															? "default"
-															: "destructive"
+														user.status === "active" ? "default" : "destructive"
 													}
 												>
 													{user.status}
@@ -102,7 +98,10 @@ export function SuperadminUserListView({
 												{new Date(user.createdAt).toLocaleDateString()}
 											</TableCell>
 											<TableCell>
-												<Link to="/superadmin/users/$userId" params={{ userId: user._id }}>
+												<Link
+													to="/superadmin/users/$userId"
+													params={{ userId: user._id }}
+												>
 													<Button variant="ghost" size="icon">
 														<Eye className="h-4 w-4" />
 													</Button>

@@ -1,7 +1,7 @@
 import {
+	createContext,
 	type HTMLAttributes,
 	type ReactNode,
-	createContext,
 	useCallback,
 	useContext,
 	useEffect,
@@ -59,7 +59,10 @@ export function DropdownMenuContent({
 
 	const handleClickOutside = useCallback(
 		(e: MouseEvent) => {
-			if (ref.current && !ref.current.parentElement?.contains(e.target as Node)) {
+			if (
+				ref.current &&
+				!ref.current.parentElement?.contains(e.target as Node)
+			) {
 				setOpen(false);
 			}
 		},
@@ -69,7 +72,8 @@ export function DropdownMenuContent({
 	useEffect(() => {
 		if (open) {
 			document.addEventListener("mousedown", handleClickOutside);
-			return () => document.removeEventListener("mousedown", handleClickOutside);
+			return () =>
+				document.removeEventListener("mousedown", handleClickOutside);
 		}
 	}, [open, handleClickOutside]);
 

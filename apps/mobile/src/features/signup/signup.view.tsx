@@ -30,7 +30,9 @@ function FormField({
 }) {
 	return (
 		<View style={{ marginBottom: 16 }}>
-			<Text style={{ fontSize: 14, fontWeight: "500", marginBottom: 6 }}>{label}</Text>
+			<Text style={{ fontSize: 14, fontWeight: "500", marginBottom: 6 }}>
+				{label}
+			</Text>
 			<TextInput
 				value={value}
 				onChangeText={onChangeText}
@@ -73,21 +75,69 @@ export function SignupView({
 				style={{ flex: 1 }}
 			>
 				<ScrollView
-					contentContainerStyle={{ justifyContent: "center", paddingHorizontal: 24, paddingVertical: 32 }}
+					contentContainerStyle={{
+						justifyContent: "center",
+						paddingHorizontal: 24,
+						paddingVertical: 32,
+					}}
 					keyboardShouldPersistTaps="handled"
 				>
-					<Text style={{ fontSize: 28, fontWeight: "bold", marginBottom: 8, textAlign: "center" }}>
+					<Text
+						style={{
+							fontSize: 28,
+							fontWeight: "bold",
+							marginBottom: 8,
+							textAlign: "center",
+						}}
+					>
 						Create account
 					</Text>
-					<Text style={{ fontSize: 14, color: "#6b7280", marginBottom: 32, textAlign: "center" }}>
+					<Text
+						style={{
+							fontSize: 14,
+							color: "#6b7280",
+							marginBottom: 32,
+							textAlign: "center",
+						}}
+					>
 						Set up your organization and get started
 					</Text>
 
-					<FormField label="First name" value={firstName} onChangeText={onFirstNameChange} placeholder="John" autoCapitalize="words" />
-					<FormField label="Last name" value={lastName} onChangeText={onLastNameChange} placeholder="Doe" autoCapitalize="words" />
-					<FormField label="Email" value={email} onChangeText={onEmailChange} placeholder="you@example.com" keyboardType="email-address" />
-					<FormField label="Password" value={password} onChangeText={onPasswordChange} placeholder="••••••••" secureTextEntry />
-					<FormField label="Organization name" value={orgName} onChangeText={onOrgNameChange} placeholder="Acme Corp" autoCapitalize="words" />
+					<FormField
+						label="First name"
+						value={firstName}
+						onChangeText={onFirstNameChange}
+						placeholder="John"
+						autoCapitalize="words"
+					/>
+					<FormField
+						label="Last name"
+						value={lastName}
+						onChangeText={onLastNameChange}
+						placeholder="Doe"
+						autoCapitalize="words"
+					/>
+					<FormField
+						label="Email"
+						value={email}
+						onChangeText={onEmailChange}
+						placeholder="you@example.com"
+						keyboardType="email-address"
+					/>
+					<FormField
+						label="Password"
+						value={password}
+						onChangeText={onPasswordChange}
+						placeholder="••••••••"
+						secureTextEntry
+					/>
+					<FormField
+						label="Organization name"
+						value={orgName}
+						onChangeText={onOrgNameChange}
+						placeholder="Acme Corp"
+						autoCapitalize="words"
+					/>
 
 					<Pressable
 						onPress={onSignup}
@@ -105,7 +155,9 @@ export function SignupView({
 						{isLoading ? (
 							<ActivityIndicator color="#fff" />
 						) : (
-							<Text style={{ color: "#fff", fontWeight: "600", fontSize: 16 }}>Create account</Text>
+							<Text style={{ color: "#fff", fontWeight: "600", fontSize: 16 }}>
+								Create account
+							</Text>
 						)}
 					</Pressable>
 				</ScrollView>

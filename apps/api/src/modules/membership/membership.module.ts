@@ -1,13 +1,10 @@
-import { Module, forwardRef } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { RoleModule } from "../role/role.module";
 import { UserModule } from "../user/user.module";
 import { MembershipRepository } from "./membership.repository";
 import { MembershipService } from "./membership.service";
-import {
-	Membership,
-	MembershipSchema,
-} from "./schemas/membership.schema";
+import { Membership, MembershipSchema } from "./schemas/membership.schema";
 
 @Module({
 	imports: [

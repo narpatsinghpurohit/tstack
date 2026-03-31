@@ -1,5 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { CreateOrganizationViewProps } from "./create-organization.hook";
@@ -16,9 +23,7 @@ export function CreateOrganizationView({
 				<h1 className="text-3xl font-bold tracking-tight">
 					Create Organization
 				</h1>
-				<p className="text-muted-foreground">
-					Set up a new organization
-				</p>
+				<p className="text-muted-foreground">Set up a new organization</p>
 			</div>
 
 			<Card>
@@ -34,7 +39,9 @@ export function CreateOrganizationView({
 							<Label htmlFor="name">Organization name</Label>
 							<Input id="name" placeholder="Acme Corp" {...register("name")} />
 							{errors.name ? (
-								<p className="text-sm text-destructive">{errors.name.message}</p>
+								<p className="text-sm text-destructive">
+									{errors.name.message}
+								</p>
 							) : null}
 						</div>
 						<div className="space-y-2">

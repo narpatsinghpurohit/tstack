@@ -17,8 +17,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 		const ctx = host.switchToHttp();
 		const response = ctx.getResponse<Response>();
 		const request = ctx.getRequest<Request>();
-		const requestId =
-			(request.headers["x-request-id"] as string) ?? uuidv4();
+		const requestId = (request.headers["x-request-id"] as string) ?? uuidv4();
 
 		let status = HttpStatus.INTERNAL_SERVER_ERROR;
 		let message = "Internal server error";

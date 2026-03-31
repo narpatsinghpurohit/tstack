@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SelectOrgScreen } from "../features/select-org";
 import { DashboardScreen } from "../features/dashboard";
+import { SelectOrgScreen } from "../features/select-org";
 import type { MainStackParamList } from "./types";
 
 const Stack = createNativeStackNavigator<MainStackParamList>();

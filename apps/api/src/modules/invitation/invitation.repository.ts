@@ -22,9 +22,7 @@ export class InvitationRepository {
 		return this.invitationModel.findById(id).lean().exec();
 	}
 
-	async findOne(
-		filter: FilterQuery<Invitation>,
-	): Promise<Invitation | null> {
+	async findOne(filter: FilterQuery<Invitation>): Promise<Invitation | null> {
 		return this.invitationModel.findOne(filter).lean().exec();
 	}
 
@@ -59,10 +57,7 @@ export class InvitationRepository {
 		return this.invitationModel.findByIdAndDelete(id).lean().exec();
 	}
 
-	async deleteByOrgAndEmail(
-		orgId: string,
-		email: string,
-	): Promise<void> {
+	async deleteByOrgAndEmail(orgId: string, email: string): Promise<void> {
 		await this.invitationModel.deleteMany({ orgId, email }).exec();
 	}
 }

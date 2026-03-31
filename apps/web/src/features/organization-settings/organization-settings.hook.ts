@@ -1,11 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PERMISSIONS, updateOrganizationSchema } from "@tstack/shared";
 import type { UpdateOrganizationDto } from "@tstack/shared";
+import { PERMISSIONS, updateOrganizationSchema } from "@tstack/shared";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useCan } from "@/features/auth/hooks/use-can";
 import { extractErrorMessage } from "@/lib/api-errors";
-import { useCurrentOrganization, useUpdateOrganization } from "./use-organization";
+import {
+	useCurrentOrganization,
+	useUpdateOrganization,
+} from "./use-organization";
 
 export function useOrganizationSettings() {
 	const { can } = useCan();
@@ -46,4 +49,6 @@ export function useOrganizationSettings() {
 	};
 }
 
-export type OrganizationSettingsViewProps = ReturnType<typeof useOrganizationSettings>;
+export type OrganizationSettingsViewProps = ReturnType<
+	typeof useOrganizationSettings
+>;

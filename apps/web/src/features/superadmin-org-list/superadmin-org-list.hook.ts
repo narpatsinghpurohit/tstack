@@ -1,5 +1,4 @@
-import type { PaginatedResponse } from "@tstack/shared";
-import type { OrganizationResponse } from "@tstack/shared";
+import type { OrganizationResponse, PaginatedResponse } from "@tstack/shared";
 import { useState } from "react";
 import { useAdminOrganizations } from "@/features/superadmin/api/use-organizations";
 

@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useAuthStore } from "../stores/use-auth-store";
+import { useEffect } from "react";
 import { getStoredSession } from "../lib/session-storage";
+import { useAuthStore } from "../stores/use-auth-store";
 import { AuthNavigator } from "./auth.navigator";
 import { MainNavigator } from "./main.navigator";
 import type { RootStackParamList } from "./types";

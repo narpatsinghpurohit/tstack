@@ -1,5 +1,5 @@
-import { Building2, ChevronsUpDown, Plus } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
+import { Building2, ChevronsUpDown, Plus } from "lucide-react";
 import { toast } from "sonner";
 import {
 	DropdownMenu,
@@ -60,7 +60,9 @@ export function OrgSwitcher() {
 					</DropdownMenuItem>
 				))}
 				<DropdownMenuSeparator />
-				<DropdownMenuItem onClick={() => navigate({ to: "/create-organization" })}>
+				<DropdownMenuItem
+					onClick={() => navigate({ to: "/create-organization" })}
+				>
 					<Plus className="mr-2 h-4 w-4" />
 					Create Organization
 				</DropdownMenuItem>

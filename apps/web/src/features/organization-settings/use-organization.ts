@@ -1,5 +1,9 @@
-import type { CreateOrganizationDto, OrganizationResponse, UpdateOrganizationDto } from "@tstack/shared";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type {
+	CreateOrganizationDto,
+	OrganizationResponse,
+	UpdateOrganizationDto,
+} from "@tstack/shared";
 import { apiClient } from "@/lib/api-client";
 
 export const organizationKeys = {
@@ -12,7 +16,9 @@ export function useCurrentOrganization() {
 	return useQuery({
 		queryKey: organizationKeys.current(),
 		queryFn: async () => {
-			const r = await apiClient.get<{ data: OrganizationResponse }>("/organizations/current");
+			const r = await apiClient.get<{ data: OrganizationResponse }>(
+				"/organizations/current",
+			);
 			return r.data.data;
 		},
 	});
@@ -22,7 +28,10 @@ export function useUpdateOrganization() {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: async (data: UpdateOrganizationDto) => {
-			const r = await apiClient.patch<{ data: OrganizationResponse }>("/organizations/current", data);
+			const r = await apiClient.patch<{ data: OrganizationResponse }>(
+				"/organizations/current",
+				data,
+			);
 			return r.data.data;
 		},
 		onSuccess: () => {
@@ -34,7 +43,10 @@ export function useUpdateOrganization() {
 export function useCreateOrganization() {
 	return useMutation({
 		mutationFn: async (data: CreateOrganizationDto) => {
-			const r = await apiClient.post<{ data: OrganizationResponse }>("/organizations", data);
+			const r = await apiClient.post<{ data: OrganizationResponse }>(
+				"/organizations",
+				data,
+			);
 			return r.data.data;
 		},
 	});

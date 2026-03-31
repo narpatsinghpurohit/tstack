@@ -1,9 +1,9 @@
+import type { LoginResponse, SignupRequestDto } from "@tstack/shared";
 import { useState } from "react";
 import { Alert } from "react-native";
 import { apiClient } from "../../lib/api-client";
 import { setStoredSession } from "../../lib/session-storage";
 import { useAuthStore } from "../../stores/use-auth-store";
-import type { SignupRequestDto, LoginResponse } from "@tstack/shared";
 
 export type SignupViewProps = ReturnType<typeof useSignup>;
 
@@ -17,7 +17,13 @@ export function useSignup() {
 	const [orgName, setOrgName] = useState("");
 
 	const handleSignup = async () => {
-		if (!firstName.trim() || !lastName.trim() || !email.trim() || !password || !orgName.trim()) {
+		if (
+			!firstName.trim() ||
+			!lastName.trim() ||
+			!email.trim() ||
+			!password ||
+			!orgName.trim()
+		) {
 			Alert.alert("Validation", "All fields are required");
 			return;
 		}
@@ -31,14 +37,17 @@ export function useSignup() {
 				password,
 				orgName: orgName.trim(),
 			};
-			const { data } = await apiClient.post<{ data: LoginResponse }>("/auth/signup", dto);
+			const { data } = await apiClient.post<{ data: LoginResponse }>(
+				"/auth/signup",
+				dto,
+			);
 			const session = data.data;
 			await setStoredSession(session);
 			setSession(session);
 		} catch (error: unknown) {
 			const message =
-				(error as { response?: { data?: { message?: string } } })?.response?.data?.message ??
-				"Signup failed. Please try again.";
+				(error as { response?: { data?: { message?: string } } })?.response
+					?.data?.message ?? "Signup failed. Please try again.";
 			Alert.alert("Error", message);
 		} finally {
 			setIsLoading(false);

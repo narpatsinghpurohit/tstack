@@ -17,12 +17,14 @@ export function useForgotPassword() {
 
 		setIsLoading(true);
 		try {
-			await apiClient.post("/auth/forgot-password", { email: email.trim().toLowerCase() });
+			await apiClient.post("/auth/forgot-password", {
+				email: email.trim().toLowerCase(),
+			});
 			setIsSubmitted(true);
 		} catch (error: unknown) {
 			const message =
-				(error as { response?: { data?: { message?: string } } })?.response?.data?.message ??
-				"Failed to send reset email. Please try again.";
+				(error as { response?: { data?: { message?: string } } })?.response
+					?.data?.message ?? "Failed to send reset email. Please try again.";
 			Alert.alert("Error", message);
 		} finally {
 			setIsLoading(false);

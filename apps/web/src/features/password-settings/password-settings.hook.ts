@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { changePasswordSchema } from "@tstack/shared";
-import type { ChangePasswordDto } from "@tstack/shared";
 import { useMutation } from "@tanstack/react-query";
+import type { ChangePasswordDto } from "@tstack/shared";
+import { changePasswordSchema } from "@tstack/shared";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { apiClient } from "@/lib/api-client";

@@ -1,5 +1,5 @@
-import { create } from "zustand";
 import type { LoginResponse } from "@tstack/shared";
+import { create } from "zustand";
 
 interface AuthState {
 	session: LoginResponse | null;

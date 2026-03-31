@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -42,7 +48,9 @@ export function OrganizationSettingsView({
 								<Label htmlFor="name">Organization name</Label>
 								<Input id="name" {...register("name")} />
 								{errors.name ? (
-									<p className="text-sm text-destructive">{errors.name.message}</p>
+									<p className="text-sm text-destructive">
+										{errors.name.message}
+									</p>
 								) : null}
 							</div>
 							<div className="space-y-2">

@@ -74,9 +74,7 @@ export function SuperadminOrgListView({
 								<TableBody>
 									{data?.data.map((org) => (
 										<TableRow key={org._id}>
-											<TableCell className="font-medium">
-												{org.name}
-											</TableCell>
+											<TableCell className="font-medium">{org.name}</TableCell>
 											<TableCell className="text-muted-foreground">
 												{org.slug}
 											</TableCell>
@@ -100,7 +98,7 @@ export function SuperadminOrgListView({
 											<TableCell>
 												<Link
 													to="/superadmin/organizations/$orgId"
-														params={{ orgId: org._id }}
+													params={{ orgId: org._id }}
 												>
 													<Button variant="ghost" size="icon">
 														<Eye className="h-4 w-4" />

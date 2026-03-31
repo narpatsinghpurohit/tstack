@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { ProfileSettingsViewProps } from "./profile-settings.hook";
@@ -32,25 +38,24 @@ export function ProfileSettingsView({
 								<Label htmlFor="firstName">First name</Label>
 								<Input id="firstName" {...register("firstName")} />
 								{errors.firstName ? (
-									<p className="text-sm text-destructive">{errors.firstName.message}</p>
+									<p className="text-sm text-destructive">
+										{errors.firstName.message}
+									</p>
 								) : null}
 							</div>
 							<div className="space-y-2">
 								<Label htmlFor="lastName">Last name</Label>
 								<Input id="lastName" {...register("lastName")} />
 								{errors.lastName ? (
-									<p className="text-sm text-destructive">{errors.lastName.message}</p>
+									<p className="text-sm text-destructive">
+										{errors.lastName.message}
+									</p>
 								) : null}
 							</div>
 						</div>
 						<div className="space-y-2">
 							<Label htmlFor="email">Email</Label>
-							<Input
-								id="email"
-								type="email"
-								value={email}
-								disabled
-							/>
+							<Input id="email" type="email" value={email} disabled />
 							<p className="text-xs text-muted-foreground">
 								Email cannot be changed
 							</p>

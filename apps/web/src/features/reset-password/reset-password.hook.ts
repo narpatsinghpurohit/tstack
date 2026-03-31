@@ -9,7 +9,10 @@ import { extractErrorMessage } from "@/lib/api-errors";
 
 const formSchema = z
 	.object({
-		newPassword: z.string().min(8, "Password must be at least 8 characters").max(128),
+		newPassword: z
+			.string()
+			.min(8, "Password must be at least 8 characters")
+			.max(128),
 		confirmPassword: z.string().min(1, "Please confirm your password"),
 	})
 	.refine((data) => data.newPassword === data.confirmPassword, {
@@ -19,7 +22,13 @@ const formSchema = z
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function useResetPassword({ token, email }: { token: string; email: string }) {
+export function useResetPassword({
+	token,
+	email,
+}: {
+	token: string;
+	email: string;
+}) {
 	const navigate = useNavigate();
 
 	const {

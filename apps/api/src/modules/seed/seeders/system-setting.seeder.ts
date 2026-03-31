@@ -7,9 +7,7 @@ import type { Seeder } from "../seeder.interface";
 export class SystemSettingSeeder implements Seeder {
 	private readonly logger = new Logger(SystemSettingSeeder.name);
 
-	constructor(
-		private readonly settingRepository: SystemSettingRepository,
-	) {}
+	constructor(private readonly settingRepository: SystemSettingRepository) {}
 
 	async run(_fresh: boolean): Promise<void> {
 		this.logger.log("Seeding system settings...");

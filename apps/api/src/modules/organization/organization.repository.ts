@@ -16,7 +16,10 @@ export class OrganizationRepository {
 		private readonly orgModel: Model<OrganizationDocument>,
 	) {}
 
-	async create(data: Partial<Organization>, session?: ClientSession): Promise<Organization> {
+	async create(
+		data: Partial<Organization>,
+		session?: ClientSession,
+	): Promise<Organization> {
 		if (session) {
 			const docs = await this.orgModel.insertMany([data], { session });
 			return docs[0].toObject();
@@ -41,7 +44,11 @@ export class OrganizationRepository {
 
 	async findMany(
 		filter: FilterQuery<Organization> = {},
-		options: { page?: number; limit?: number; sort?: Record<string, 1 | -1> } = {},
+		options: {
+			page?: number;
+			limit?: number;
+			sort?: Record<string, 1 | -1>;
+		} = {},
 	): Promise<{ data: Organization[]; total: number }> {
 		const page = options.page ?? 1;
 		const limit = options.limit ?? 20;

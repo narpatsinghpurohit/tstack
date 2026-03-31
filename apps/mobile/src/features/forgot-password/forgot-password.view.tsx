@@ -1,11 +1,10 @@
 import {
+	ActivityIndicator,
 	KeyboardAvoidingView,
 	Platform,
 	Pressable,
 	Text,
 	TextInput,
-	View,
-	ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { ForgotPasswordViewProps } from "./forgot-password.hook";
@@ -19,8 +18,22 @@ export function ForgotPasswordView({
 }: ForgotPasswordViewProps) {
 	if (isSubmitted) {
 		return (
-			<SafeAreaView style={{ flex: 1, backgroundColor: "#fff", justifyContent: "center", paddingHorizontal: 24 }}>
-				<Text style={{ fontSize: 28, fontWeight: "bold", marginBottom: 8, textAlign: "center" }}>
+			<SafeAreaView
+				style={{
+					flex: 1,
+					backgroundColor: "#fff",
+					justifyContent: "center",
+					paddingHorizontal: 24,
+				}}
+			>
+				<Text
+					style={{
+						fontSize: 28,
+						fontWeight: "bold",
+						marginBottom: 8,
+						textAlign: "center",
+					}}
+				>
 					Check your email
 				</Text>
 				<Text style={{ fontSize: 14, color: "#6b7280", textAlign: "center" }}>
@@ -36,14 +49,30 @@ export function ForgotPasswordView({
 				behavior={Platform.OS === "ios" ? "padding" : "height"}
 				style={{ flex: 1, justifyContent: "center", paddingHorizontal: 24 }}
 			>
-				<Text style={{ fontSize: 28, fontWeight: "bold", marginBottom: 8, textAlign: "center" }}>
+				<Text
+					style={{
+						fontSize: 28,
+						fontWeight: "bold",
+						marginBottom: 8,
+						textAlign: "center",
+					}}
+				>
 					Forgot password?
 				</Text>
-				<Text style={{ fontSize: 14, color: "#6b7280", marginBottom: 32, textAlign: "center" }}>
+				<Text
+					style={{
+						fontSize: 14,
+						color: "#6b7280",
+						marginBottom: 32,
+						textAlign: "center",
+					}}
+				>
 					Enter your email and we'll send you a reset link
 				</Text>
 
-				<Text style={{ fontSize: 14, fontWeight: "500", marginBottom: 6 }}>Email</Text>
+				<Text style={{ fontSize: 14, fontWeight: "500", marginBottom: 6 }}>
+					Email
+				</Text>
 				<TextInput
 					value={email}
 					onChangeText={onEmailChange}
@@ -77,7 +106,9 @@ export function ForgotPasswordView({
 					{isLoading ? (
 						<ActivityIndicator color="#fff" />
 					) : (
-						<Text style={{ color: "#fff", fontWeight: "600", fontSize: 16 }}>Send reset link</Text>
+						<Text style={{ color: "#fff", fontWeight: "600", fontSize: 16 }}>
+							Send reset link
+						</Text>
 					)}
 				</Pressable>
 			</KeyboardAvoidingView>

@@ -1,6 +1,9 @@
-import type { CreateInvitationDto, InvitationResponse } from "@tstack/shared";
-import type { PaginatedResponse } from "@tstack/shared";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type {
+	CreateInvitationDto,
+	InvitationResponse,
+	PaginatedResponse,
+} from "@tstack/shared";
 import { apiClient } from "@/lib/api-client";
 
 interface InvitationListParams {
@@ -10,14 +13,17 @@ interface InvitationListParams {
 
 export const invitationKeys = {
 	all: ["invitations"] as const,
-	list: (params: InvitationListParams) => [...invitationKeys.all, "list", params] as const,
+	list: (params: InvitationListParams) =>
+		[...invitationKeys.all, "list", params] as const,
 };
 
 export function useInvitations(params: InvitationListParams = {}) {
 	return useQuery({
 		queryKey: invitationKeys.list(params),
 		queryFn: async () => {
-			const r = await apiClient.get<{ data: PaginatedResponse<InvitationResponse> }>("/invitations", { params });
+			const r = await apiClient.get<{
+				data: PaginatedResponse<InvitationResponse>;
+			}>("/invitations", { params });
 			return r.data.data;
 		},
 	});
@@ -27,7 +33,10 @@ export function useCreateInvitation() {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: async (data: CreateInvitationDto) => {
-			const r = await apiClient.post<{ data: InvitationResponse }>("/invitations", data);
+			const r = await apiClient.post<{ data: InvitationResponse }>(
+				"/invitations",
+				data,
+			);
 			return r.data.data;
 		},
 		onSuccess: () => {

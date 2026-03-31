@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { updateProfileSchema } from "@tstack/shared";
-import type { UpdateProfileDto } from "@tstack/shared";
 import { useMutation } from "@tanstack/react-query";
+import type { UpdateProfileDto } from "@tstack/shared";
+import { updateProfileSchema } from "@tstack/shared";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { updateStoredUser } from "@/features/auth/lib/session-storage";

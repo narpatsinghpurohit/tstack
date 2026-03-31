@@ -1,10 +1,20 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ORG_ASSIGNABLE_ROLE_NAMES, createInvitationSchema } from "@tstack/shared";
 import type { CreateInvitationDto } from "@tstack/shared";
+import {
+	createInvitationSchema,
+	ORG_ASSIGNABLE_ROLE_NAMES,
+} from "@tstack/shared";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
@@ -73,7 +83,9 @@ export function InviteMemberDialog({
 							))}
 						</Select>
 						{errors.roleName ? (
-							<p className="text-sm text-destructive">{errors.roleName.message}</p>
+							<p className="text-sm text-destructive">
+								{errors.roleName.message}
+							</p>
 						) : null}
 					</div>
 					<DialogFooter>

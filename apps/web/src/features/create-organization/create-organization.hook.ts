@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createOrganizationSchema } from "@tstack/shared";
-import type { CreateOrganizationDto } from "@tstack/shared";
 import { useNavigate } from "@tanstack/react-router";
+import type { CreateOrganizationDto } from "@tstack/shared";
+import { createOrganizationSchema } from "@tstack/shared";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { selectOrg } from "@/features/auth/lib/auth-api";
@@ -51,4 +51,6 @@ export function useCreateOrganizationForm() {
 	};
 }
 
-export type CreateOrganizationViewProps = ReturnType<typeof useCreateOrganizationForm>;
+export type CreateOrganizationViewProps = ReturnType<
+	typeof useCreateOrganizationForm
+>;

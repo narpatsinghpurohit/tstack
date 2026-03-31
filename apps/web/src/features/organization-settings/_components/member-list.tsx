@@ -4,8 +4,21 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
 import { useCan } from "@/features/auth/hooks/use-can";
 import { extractErrorMessage } from "@/lib/api-errors";
 import { useMembers, useRemoveMember } from "../use-members";
@@ -99,7 +112,10 @@ export function MemberList() {
 							))}
 							{!data?.data.length ? (
 								<TableRow>
-									<TableCell colSpan={5} className="text-center text-muted-foreground">
+									<TableCell
+										colSpan={5}
+										className="text-center text-muted-foreground"
+									>
 										No members found
 									</TableCell>
 								</TableRow>

@@ -19,23 +19,41 @@ export async function signup(dto: SignupRequestDto): Promise<LoginResponse> {
 	return r.data.data;
 }
 
-export async function forgotPassword(dto: ForgotPasswordRequestDto): Promise<{ message: string }> {
-	const r = await apiClient.post<{ data: { message: string } }>("/auth/forgot-password", dto);
+export async function forgotPassword(
+	dto: ForgotPasswordRequestDto,
+): Promise<{ message: string }> {
+	const r = await apiClient.post<{ data: { message: string } }>(
+		"/auth/forgot-password",
+		dto,
+	);
 	return r.data.data;
 }
 
-export async function resetPassword(dto: ResetPasswordRequestDto): Promise<{ message: string }> {
-	const r = await apiClient.post<{ data: { message: string } }>("/auth/reset-password", dto);
+export async function resetPassword(
+	dto: ResetPasswordRequestDto,
+): Promise<{ message: string }> {
+	const r = await apiClient.post<{ data: { message: string } }>(
+		"/auth/reset-password",
+		dto,
+	);
 	return r.data.data;
 }
 
 export async function refreshAccessToken(refreshToken: string) {
-	const r = await apiClient.post<{ data: LoginResponse["tokens"] }>("/auth/refresh", { refreshToken });
+	const r = await apiClient.post<{ data: LoginResponse["tokens"] }>(
+		"/auth/refresh",
+		{ refreshToken },
+	);
 	return r.data.data;
 }
 
-export async function selectOrg(dto: SelectOrgRequestDto): Promise<LoginResponse> {
-	const r = await apiClient.post<{ data: LoginResponse }>("/auth/select-org", dto);
+export async function selectOrg(
+	dto: SelectOrgRequestDto,
+): Promise<LoginResponse> {
+	const r = await apiClient.post<{ data: LoginResponse }>(
+		"/auth/select-org",
+		dto,
+	);
 	return r.data.data;
 }
 

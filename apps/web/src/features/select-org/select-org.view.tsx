@@ -1,6 +1,12 @@
 import { Building2, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import type { SelectOrgViewProps } from "./select-org.hook";
 
 export function SelectOrgView({
@@ -16,15 +22,15 @@ export function SelectOrgView({
 			<Card className="w-full max-w-md">
 				<CardHeader>
 					<CardTitle>Select Organization</CardTitle>
-					<CardDescription>
-						Choose an organization to continue
-					</CardDescription>
+					<CardDescription>Choose an organization to continue</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-2">
 					{memberships.map((membership) => (
 						<Button
 							key={membership.orgId}
-							variant={membership.orgId === currentOrgId ? "default" : "outline"}
+							variant={
+								membership.orgId === currentOrgId ? "default" : "outline"
+							}
 							className="w-full justify-start gap-3"
 							onClick={() => onSelect(membership.orgId)}
 						>

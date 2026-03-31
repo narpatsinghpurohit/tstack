@@ -1,14 +1,10 @@
-import { Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import type { UpdateSystemSettingsDto } from "@tstack/shared";
 import { SystemSettingRepository } from "./system-setting.repository";
 
 @Injectable()
 export class SystemSettingService {
-	private readonly logger = new Logger(SystemSettingService.name);
-
-	constructor(
-		private readonly settingRepository: SystemSettingRepository,
-	) {}
+	constructor(private readonly settingRepository: SystemSettingRepository) {}
 
 	async findAll() {
 		return this.settingRepository.findAll();

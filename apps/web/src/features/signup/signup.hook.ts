@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signupRequestSchema } from "@tstack/shared";
-import type { SignupRequestDto } from "@tstack/shared";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import type { SignupRequestDto } from "@tstack/shared";
+import { signupRequestSchema } from "@tstack/shared";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { signup } from "@/features/auth/lib/auth-api";

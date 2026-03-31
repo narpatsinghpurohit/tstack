@@ -34,9 +34,7 @@ async function bootstrap() {
 	const port = configService.getOrThrow<number>("app.PORT");
 	await app.listen(port);
 	logger.log(`Application listening on port ${port}`);
-	logger.log(
-		`Swagger docs available at http://localhost:${port}/api/docs`,
-	);
+	logger.log(`Swagger docs available at http://localhost:${port}/api/docs`);
 }
 
 bootstrap();

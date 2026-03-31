@@ -16,7 +16,10 @@ export class MembershipRepository {
 		private readonly membershipModel: Model<MembershipDocument>,
 	) {}
 
-	async create(data: Partial<Membership>, session?: ClientSession): Promise<Membership> {
+	async create(
+		data: Partial<Membership>,
+		session?: ClientSession,
+	): Promise<Membership> {
 		if (session) {
 			const docs = await this.membershipModel.insertMany([data], { session });
 			return docs[0].toObject();
@@ -29,9 +32,7 @@ export class MembershipRepository {
 		return this.membershipModel.findById(id).lean().exec();
 	}
 
-	async findOne(
-		filter: FilterQuery<Membership>,
-	): Promise<Membership | null> {
+	async findOne(filter: FilterQuery<Membership>): Promise<Membership | null> {
 		return this.membershipModel.findOne(filter).lean().exec();
 	}
 
@@ -43,10 +44,9 @@ export class MembershipRepository {
 	}
 
 	async findByUserId(userId: string): Promise<Membership[]> {
-		return this.membershipModel
-			.find({ userId })
-			.lean()
-			.exec() as Promise<Membership[]>;
+		return this.membershipModel.find({ userId }).lean().exec() as Promise<
+			Membership[]
+		>;
 	}
 
 	async findByOrgId(

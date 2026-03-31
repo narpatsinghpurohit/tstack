@@ -8,7 +8,6 @@ import {
 	Post,
 	Query,
 } from "@nestjs/common";
-import { PERMISSIONS } from "@tstack/shared";
 import type {
 	AuthenticatedUser,
 	ChangePasswordDto,
@@ -20,6 +19,7 @@ import type {
 import {
 	changePasswordSchema,
 	createUserSchema,
+	PERMISSIONS,
 	updateProfileSchema,
 	updateUserInfoSchema,
 	updateUserRolesSchema,

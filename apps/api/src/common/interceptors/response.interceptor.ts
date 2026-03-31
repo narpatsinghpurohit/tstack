@@ -5,7 +5,7 @@ import {
 	type NestInterceptor,
 } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { type Observable, map } from "rxjs";
+import { map, type Observable } from "rxjs";
 import { v4 as uuidv4 } from "uuid";
 
 export interface ApiResponse<T> {
@@ -25,8 +25,7 @@ export class ResponseInterceptor<T>
 	): Observable<ApiResponse<T>> {
 		const request = context.switchToHttp().getRequest<Request>();
 		const response = context.switchToHttp().getResponse<Response>();
-		const requestId =
-			(request.headers["x-request-id"] as string) ?? uuidv4();
+		const requestId = (request.headers["x-request-id"] as string) ?? uuidv4();
 
 		return next.handle().pipe(
 			map((data) => ({

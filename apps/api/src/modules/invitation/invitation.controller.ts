@@ -7,7 +7,6 @@ import {
 	Post,
 	Query,
 } from "@nestjs/common";
-import { PERMISSIONS } from "@tstack/shared";
 import type {
 	AcceptInvitationDto,
 	AuthenticatedUser,
@@ -16,6 +15,7 @@ import type {
 import {
 	acceptInvitationSchema,
 	createInvitationSchema,
+	PERMISSIONS,
 } from "@tstack/shared";
 import { Can } from "../../common/decorators/can.decorator";
 import { CurrentUser } from "../../common/decorators/current-user.decorator";

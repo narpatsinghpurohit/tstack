@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ALL_PERMISSION_NAMES, createRoleSchema } from "@tstack/shared";
-import type { CreateRoleDto } from "@tstack/shared";
 import { useNavigate, useParams } from "@tanstack/react-router";
+import type { CreateRoleDto } from "@tstack/shared";
+import { ALL_PERMISSION_NAMES, createRoleSchema } from "@tstack/shared";
 import type { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";

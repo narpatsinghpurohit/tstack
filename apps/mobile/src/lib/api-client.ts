@@ -1,5 +1,9 @@
 import axios from "axios";
-import { getStoredSession, updateStoredTokens, clearStoredSession } from "./session-storage";
+import {
+	clearStoredSession,
+	getStoredSession,
+	updateStoredTokens,
+} from "./session-storage";
 
 const API_URL = "http://localhost:8000/api";
 
