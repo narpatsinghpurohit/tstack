@@ -1,6 +1,14 @@
-> *This is a generic template. Replace `Product` with your entity and `@your-org/shared` with your shared package.*
+> *Replace `Product` with your entity and the shared package import with your project's from CLAUDE.md.*
 
-# Generic Screen Feature (Product List)
+# Generic Screen Feature (Product List) — React Native Reusables
+
+## Prerequisites
+
+Ensure UI components are installed:
+```bash
+cd apps/mobile
+bunx --bun @react-native-reusables/cli@latest add button card badge text separator
+```
 
 ## Hook — `product-list.hook.ts`
 
@@ -8,7 +16,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCan } from "@/hooks/use-can";
 import { apiClient } from "@/lib/api-client";
-import type { ProductResponse } from "@your-org/shared";
+import type { ProductResponse } from "@tstack/shared";
 
 const productKeys = {
   all: ["products"] as const,
@@ -34,7 +42,7 @@ export function useProductList() {
   return {
     products: data ?? [],
     isLoading,
-    canDelete: can("products:delete"),
+    canDelete: can("products.delete"),
     onDelete: (id: string) => deleteMutation.mutate(id),
   };
 }
@@ -43,8 +51,12 @@ export function useProductList() {
 ## View — `product-list.view.tsx`
 
 ```tsx
-import { FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Text } from "@/components/ui/text";
 import type { ProductListViewProps } from "./product-list.hook";
 
 export function ProductListView({ products, isLoading, canDelete, onDelete }: ProductListViewProps) {
@@ -61,23 +73,26 @@ export function ProductListView({ products, isLoading, canDelete, onDelete }: Pr
       <FlatList
         data={products}
         keyExtractor={(item) => item._id}
+        ItemSeparatorComponent={() => <Separator />}
         renderItem={({ item }) => (
-          <View className="flex-row items-center justify-between p-4 border-b border-border">
-            <View className="flex-1">
-              <Text className="text-lg font-medium text-foreground">{item.name}</Text>
-              <Text className="text-sm text-muted-foreground">{item.description}</Text>
-            </View>
-            {canDelete ? (
-              <Pressable
-                onPress={() => onDelete(item._id)}
-                accessibilityLabel={`Delete ${item.name}`}
-                accessibilityRole="button"
-                className="px-3 py-2"
-              >
-                <Text className="text-destructive">Delete</Text>
-              </Pressable>
-            ) : null}
-          </View>
+          <Card className="mx-4 my-2">
+            <CardContent className="flex-row items-center justify-between p-4">
+              <View className="flex-1">
+                <Text className="text-lg font-medium">{item.name}</Text>
+                <Text className="text-sm text-muted-foreground">{item.description}</Text>
+              </View>
+              {canDelete ? (
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onPress={() => onDelete(item._id)}
+                  accessibilityLabel={`Delete ${item.name}`}
+                >
+                  <Text>Delete</Text>
+                </Button>
+              ) : null}
+            </CardContent>
+          </Card>
         )}
         ListEmptyComponent={
           <View className="flex-1 items-center justify-center p-8">
@@ -118,11 +133,14 @@ import { ProductList } from "@/features/product-list";
 
 ## Key patterns
 
-1. **3-file split** — identical to web: hook + view + glue
+1. **3-file split** — hook + view + glue (identical to web)
 2. **View = ZERO hooks** — pure RN components, props only
-3. **FlatList** — virtualized list, not ScrollView + .map()
-4. **SafeAreaView** — wraps screen root
-5. **NativeWind className** — semantic colors, consistent with web Tailwind
-6. **accessibilityLabel** — on every interactive Pressable
-7. **Ternary** for conditional rendering — not `&&`
-8. **Query key factory** — same pattern as web
+3. **React Native Reusables** — `Button`, `Card`, `Text`, `Badge` from `@/components/ui/`
+4. **Text component** — always use `<Text>` from reusables, never bare strings
+5. **Button needs Text child** — `<Button><Text>Label</Text></Button>`
+6. **FlatList** — virtualized list, not ScrollView + .map()
+7. **SafeAreaView** — wraps screen root
+8. **NativeWind className** — semantic theme tokens consistent with web
+9. **accessibilityLabel** — on every interactive element
+10. **Ternary** for conditional rendering — not `&&`
+11. **Query key factory** — same pattern as web

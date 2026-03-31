@@ -9,7 +9,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Select } from "@/components/ui/select";
 import type { ViewProps } from "./superadmin-org-detail.hook";
 
 export function SuperadminOrgDetailView({
@@ -102,15 +101,16 @@ export function SuperadminOrgDetailView({
 							</Badge>
 						</div>
 						<div className="space-y-2">
-							<Select
+							<select
 								value={org.status}
 								onChange={(e) => onStatusChange(e.target.value)}
 								disabled={isStatusPending}
+								className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
 							>
 								<option value="active">Active</option>
 								<option value="suspended">Suspended</option>
 								<option value="inactive">Inactive</option>
-							</Select>
+							</select>
 						</div>
 					</CardContent>
 				</Card>

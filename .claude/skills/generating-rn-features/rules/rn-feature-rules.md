@@ -92,7 +92,58 @@ const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 Use `Dimensions` API, percentage-based sizing, or `flex`. No `width: 375`.
 
 ## MOB-9: Accessibility on interactive elements
-Every `Pressable`, `TouchableOpacity`, or interactive element must have `accessibilityLabel` and `accessibilityRole`.
+Every `Pressable`, `Button`, or interactive element must have `accessibilityLabel` and `accessibilityRole`.
 ```tsx
-<Pressable accessibilityLabel="Delete product" accessibilityRole="button" onPress={onDelete}>
+<Button accessibilityLabel="Delete product" onPress={onDelete}>
+  <Text>Delete</Text>
+</Button>
+```
+
+## React Native Reusables (UI Components)
+
+## UI-1: Use React Native Reusables components
+All UI primitives must come from `@/components/ui/`. Never build manual Button, Input, Card, Dialog, etc.
+```bash
+# Add missing components
+bunx --bun @react-native-reusables/cli@latest add button input card text
+```
+
+## UI-2: Text component required
+All text must use `<Text>` from `@/components/ui/text`. RN does not support bare strings.
+```tsx
+// BAD — crashes on RN
+<View>Hello</View>
+
+// GOOD
+import { Text } from "@/components/ui/text";
+<View><Text>Hello</Text></View>
+```
+
+## UI-3: Button requires Text child
+RN Button does not accept string children.
+```tsx
+// BAD
+<Button>Submit</Button>
+
+// GOOD
+<Button><Text>Submit</Text></Button>
+```
+
+## UI-4: PortalHost for overlays
+Dialog, DropdownMenu, Select, Tooltip, Popover need `PortalHost` in root layout.
+
+## UI-5: Label uses nativeID (not htmlFor)
+```tsx
+<Label nativeID="email">Email</Label>
+<Input aria-labelledby="email" />
+```
+
+## UI-6: NativeWind theme tokens
+Use semantic tokens from shadcn theme. Never hardcode colors.
+```tsx
+// BAD
+<View style={{ backgroundColor: '#fff' }}>
+
+// GOOD
+<View className="bg-background">
 ```

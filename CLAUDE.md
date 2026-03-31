@@ -74,11 +74,16 @@ bun seed --class=X   # Run single seeder
 
 ### Mobile (React Native)
 - Same 3-file split pattern as web (hook/view/glue)
+- **React Native Reusables** for UI components (shadcn/ui port for RN) — `@/components/ui/`
+- **RN Primitives** (`@rn-primitives/*`) as foundation layer (Radix port)
 - React Navigation for routing (Stack, Tab, Drawer)
-- NativeWind for styling (Tailwind for RN — consistent with web)
+- NativeWind for styling (Tailwind for RN — consistent with web theme tokens)
 - TanStack Query + Zustand (same as web)
 - FlatList/FlashList for lists, never .map() in ScrollView
+- `react-native-reanimated` for animations
+- `lucide-react-native` for icons
 - Jest + React Native Testing Library for tests
+- Add components via CLI: `bunx --bun @react-native-reusables/cli@latest add <component>`
 
 ### Shared package
 - Zod schema trio per entity: `createSchema` + `updateSchema` (.partial()) + `responseSchema` (.extend())

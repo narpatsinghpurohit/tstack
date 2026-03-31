@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
+	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
@@ -41,31 +42,39 @@ export function UserProfileMenu() {
 					{user.firstName} {user.lastName}
 				</span>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end" className="w-56">
-				<DropdownMenuLabel>
-					<div className="flex flex-col space-y-1">
-						<p className="text-sm font-medium">
-							{user.firstName} {user.lastName}
-						</p>
-						<p className="text-xs text-muted-foreground">{user.email}</p>
-					</div>
-				</DropdownMenuLabel>
+			<DropdownMenuContent align="start" side="top" className="w-56">
+				<DropdownMenuGroup>
+					<DropdownMenuLabel>
+						<div className="flex flex-col space-y-1">
+							<p className="text-sm font-medium">
+								{user.firstName} {user.lastName}
+							</p>
+							<p className="text-xs text-muted-foreground">{user.email}</p>
+						</div>
+					</DropdownMenuLabel>
+				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem onClick={() => navigate({ to: "/settings/profile" })}>
-					<User className="mr-2 h-4 w-4" />
-					Profile
-				</DropdownMenuItem>
-				<DropdownMenuItem
-					onClick={() => navigate({ to: "/settings/password" })}
-				>
-					<Settings className="mr-2 h-4 w-4" />
-					Settings
-				</DropdownMenuItem>
+				<DropdownMenuGroup>
+					<DropdownMenuItem
+						onClick={() => navigate({ to: "/settings/profile" })}
+					>
+						<User className="mr-2 h-4 w-4" />
+						Profile
+					</DropdownMenuItem>
+					<DropdownMenuItem
+						onClick={() => navigate({ to: "/settings/password" })}
+					>
+						<Settings className="mr-2 h-4 w-4" />
+						Settings
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem onClick={handleLogout}>
-					<LogOut className="mr-2 h-4 w-4" />
-					Log out
-				</DropdownMenuItem>
+				<DropdownMenuGroup>
+					<DropdownMenuItem onClick={handleLogout}>
+						<LogOut className="mr-2 h-4 w-4" />
+						Log out
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

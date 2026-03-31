@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
+	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
@@ -47,25 +48,31 @@ export function OrgSwitcher() {
 				<ChevronsUpDown className="h-4 w-4 shrink-0 text-muted-foreground" />
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="start" className="w-56">
-				<DropdownMenuLabel>Organizations</DropdownMenuLabel>
+				<DropdownMenuGroup>
+					<DropdownMenuLabel>Organizations</DropdownMenuLabel>
+				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
-				{user.memberships.map((membership) => (
+				<DropdownMenuGroup>
+					{user.memberships.map((membership) => (
+						<DropdownMenuItem
+							key={membership.orgId}
+							onClick={() => handleSwitch(membership.orgId)}
+							className={membership.orgId === user.orgId ? "bg-accent" : ""}
+						>
+							<Building2 className="mr-2 h-4 w-4" />
+							{membership.orgName}
+						</DropdownMenuItem>
+					))}
+				</DropdownMenuGroup>
+				<DropdownMenuSeparator />
+				<DropdownMenuGroup>
 					<DropdownMenuItem
-						key={membership.orgId}
-						onClick={() => handleSwitch(membership.orgId)}
-						className={membership.orgId === user.orgId ? "bg-accent" : ""}
+						onClick={() => navigate({ to: "/create-organization" })}
 					>
-						<Building2 className="mr-2 h-4 w-4" />
-						{membership.orgName}
+						<Plus className="mr-2 h-4 w-4" />
+						Create Organization
 					</DropdownMenuItem>
-				))}
-				<DropdownMenuSeparator />
-				<DropdownMenuItem
-					onClick={() => navigate({ to: "/create-organization" })}
-				>
-					<Plus className="mr-2 h-4 w-4" />
-					Create Organization
-				</DropdownMenuItem>
+				</DropdownMenuGroup>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

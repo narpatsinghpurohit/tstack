@@ -13,13 +13,66 @@
 
 See `generating-rn-features/rules/rn-feature-rules.md` for detailed descriptions of FEAT-R1 through R8.
 
+## React Native Reusables (UI Components)
+
+## UI-1: Use React Native Reusables components
+All UI primitives must come from `@/components/ui/`. Never build manual Button, Input, Card, Dialog, etc.
+```bash
+# Add missing components
+bunx --bun @react-native-reusables/cli@latest add button input card dialog
+```
+
+## UI-2: Text component required
+All text must use `<Text>` from `@/components/ui/text`. React Native does not support bare strings.
+```tsx
+// BAD
+<View>Hello</View>
+
+// GOOD
+import { Text } from "@/components/ui/text";
+<View><Text>Hello</Text></View>
+```
+
+## UI-3: Button requires Text child
+RN Button does not accept string children directly.
+```tsx
+// BAD
+<Button>Submit</Button>
+
+// GOOD
+<Button><Text>Submit</Text></Button>
+```
+
+## UI-4: PortalHost required for overlay components
+Dialog, DropdownMenu, Select, Tooltip, Popover need `PortalHost` in root layout.
+
+## UI-5: Label uses nativeID
+```tsx
+// BAD (web pattern)
+<Label htmlFor="email">Email</Label>
+
+// GOOD (RN pattern)
+<Label nativeID="email">Email</Label>
+<Input aria-labelledby="email" />
+```
+
+## UI-6: Theme tokens from NativeWind
+Use semantic tokens, never hardcoded colors.
+```tsx
+// BAD
+<View style={{ backgroundColor: '#ffffff' }}>
+
+// GOOD
+<View className="bg-background">
+```
+
 ## Mobile-Specific
 
 ## MOB-1: FlatList/FlashList for lists
 Never `.map()` inside ScrollView. FlatList provides virtualization.
 
 ## MOB-2: NativeWind className for styling
-Use `className` prop. StyleSheet only for complex animations or platform edge cases.
+Use `className` prop. StyleSheet only for complex Reanimated animations.
 
 ## MOB-3: No web-only APIs
 No `localStorage`, `window`, `document`, DOM, CSS media queries.
@@ -40,7 +93,7 @@ Define param list type. Use `useNavigation<NavigationProp<...>>()`.
 Use flex, percentage, or Dimensions API.
 
 ## MOB-9: Accessibility on interactive elements
-Every Pressable/TouchableOpacity needs `accessibilityLabel` + `accessibilityRole`.
+Every Pressable/Button needs `accessibilityLabel` + `accessibilityRole`.
 
 ## Performance
 
@@ -52,3 +105,6 @@ Use `react-native-fast-image` or `expo-image` for network images. Never plain `I
 
 ## PERF-3: No large inline objects in JSX
 Extract style/config objects outside the component. Inline objects cause re-renders every render cycle.
+
+## PERF-4: Reanimated for animations
+Use `react-native-reanimated` for native-quality animations. Never `Animated` API from RN core.

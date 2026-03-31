@@ -5,6 +5,7 @@ import type {
 	UpdateOrganizationDto,
 } from "@tstack/shared";
 import { apiClient } from "@/lib/api-client";
+import { useAuthStore } from "@/stores/use-auth-store";
 
 export const organizationKeys = {
 	all: ["organizations"] as const,
@@ -13,23 +14,26 @@ export const organizationKeys = {
 };
 
 export function useCurrentOrganization() {
+	const orgId = useAuthStore((s) => s.session?.user.orgId);
 	return useQuery({
 		queryKey: organizationKeys.current(),
 		queryFn: async () => {
 			const r = await apiClient.get<{ data: OrganizationResponse }>(
-				"/organizations/current",
+				`/organizations/${orgId}`,
 			);
 			return r.data.data;
 		},
+		enabled: !!orgId,
 	});
 }
 
 export function useUpdateOrganization() {
+	const orgId = useAuthStore((s) => s.session?.user.orgId);
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: async (data: UpdateOrganizationDto) => {
 			const r = await apiClient.patch<{ data: OrganizationResponse }>(
-				"/organizations/current",
+				`/organizations/${orgId}`,
 				data,
 			);
 			return r.data.data;

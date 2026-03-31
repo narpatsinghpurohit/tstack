@@ -1,6 +1,6 @@
 ---
 name: reviewing-rn-code
-description: Review React Native mobile code for patterns, performance, accessibility, and project conventions. Enforces non-negotiable rules across feature structure, performance, platform handling, and accessibility. Use when reviewing mobile code, pull requests, RN components, or the user asks to review React Native or mobile code in apps/mobile.
+description: Review React Native mobile code for patterns, performance, accessibility, and project conventions. Enforces non-negotiable rules across feature structure, performance, platform handling, accessibility, and React Native Reusables usage. Use when reviewing mobile code, pull requests, RN components, or the user asks to review React Native or mobile code in apps/mobile.
 context: fork
 agent: code-reviewer
 allowed-tools: Read, Grep, Glob
@@ -36,12 +36,23 @@ allowed-tools: Read, Grep, Glob
 - [ ] accessibilityLabel on all interactive elements
 - [ ] Permission gating with useCan
 
+## React Native Reusables checks
+
+- [ ] UI components from `@/components/ui/`, not manual implementations
+- [ ] `<Text>` from `@/components/ui/text` for all text (never bare strings)
+- [ ] `<Button>` has `<Text>` child (RN Button requires explicit Text)
+- [ ] PortalHost in root layout (if using Dialog, DropdownMenu, Select, Tooltip, Popover)
+- [ ] Label uses `nativeID` (not `htmlFor`) for form association
+- [ ] Input uses `aria-labelledby` to connect to Label
+- [ ] Theme tokens from NativeWind (`bg-background`, `text-foreground`) — not hardcoded colors
+
 ## Performance checks
 
 - [ ] React.memo on FlatList renderItem components
 - [ ] Image caching (react-native-fast-image or expo-image)
 - [ ] No large inline objects in JSX (forces re-renders)
 - [ ] No unnecessary re-renders from unstable references
+- [ ] Reanimated used for complex animations (not Animated API)
 
 ## Output format
 

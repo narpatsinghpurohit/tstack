@@ -111,4 +111,8 @@ export class MembershipRepository {
 	async countByOrgId(orgId: string): Promise<number> {
 		return this.membershipModel.countDocuments({ orgId }).exec();
 	}
+
+	async deleteByUserId(userId: string): Promise<{ deletedCount: number }> {
+		return this.membershipModel.deleteMany({ userId }).exec();
+	}
 }

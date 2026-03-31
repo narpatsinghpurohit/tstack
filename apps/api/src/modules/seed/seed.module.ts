@@ -1,4 +1,6 @@
 import { Module } from "@nestjs/common";
+import { MembershipModule } from "../membership/membership.module";
+import { OrganizationModule } from "../organization/organization.module";
 import { PermissionModule } from "../permission/permission.module";
 import { RoleModule } from "../role/role.module";
 import { SystemSettingModule } from "../system-setting/system-setting.module";
@@ -10,7 +12,14 @@ import { SuperadminSeeder } from "./seeders/superadmin.seeder";
 import { SystemSettingSeeder } from "./seeders/system-setting.seeder";
 
 @Module({
-	imports: [PermissionModule, RoleModule, UserModule, SystemSettingModule],
+	imports: [
+		PermissionModule,
+		RoleModule,
+		UserModule,
+		SystemSettingModule,
+		OrganizationModule,
+		MembershipModule,
+	],
 	providers: [
 		DatabaseSeeder,
 		PermissionSeeder,

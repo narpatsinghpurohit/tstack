@@ -9,7 +9,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Select } from "@/components/ui/select";
 import type { ViewProps } from "./superadmin-user-detail.hook";
 
 export function SuperadminUserDetailView({
@@ -98,16 +97,17 @@ export function SuperadminUserDetailView({
 						</div>
 						<div className="space-y-2">
 							<p className="text-sm font-medium">Status</p>
-							<Select
+							<select
 								value={user.status}
 								onChange={(e) =>
 									onStatusChange(e.target.value as "active" | "inactive")
 								}
 								disabled={isUpdatePending}
+								className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
 							>
 								<option value="active">Active</option>
 								<option value="inactive">Inactive</option>
-							</Select>
+							</select>
 						</div>
 					</CardContent>
 				</Card>
