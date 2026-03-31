@@ -4,16 +4,16 @@
 	"private": true,
 	"scripts": {
 		"build": "nest build",
-		"dev": "nest start --watch",
-		"start": "nest start",
-		"start:prod": "node dist/main",
+		"dev": "bun --watch run src/main.ts",
+		"start": "bun run src/main.ts",
+		"start:prod": "bun run dist/main.js",
 		"lint": "biome check src/",
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"test:cov": "jest --coverage",
 		"type-check": "tsc --noEmit",
-		"seed": "ts-node -r tsconfig-paths/register src/seed.ts",
-		"seed:fresh": "ts-node -r tsconfig-paths/register src/seed.ts --fresh"
+		"seed": "bun run src/seed.ts",
+		"seed:fresh": "bun run src/seed.ts --fresh"
 	},
 	"dependencies": {
 		"@nestjs/common": "^11.0.1",
