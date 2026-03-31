@@ -1,4 +1,4 @@
-import type { FilterQuery, Model, UpdateQuery } from "mongoose";
+import type { Document, FilterQuery, Model, UpdateQuery } from "mongoose";
 
 /**
  * Abstract base repository that auto-scopes all queries by orgId.
@@ -10,12 +10,12 @@ export abstract class BaseRepository<T> {
 
 	async create(data: Partial<T>): Promise<T> {
 		const doc = await this.model.create(data);
-		return doc.toObject() as T;
+		return (doc as Document).toObject() as T;
 	}
 
 	async createMany(data: Partial<T>[]): Promise<T[]> {
 		const docs = await this.model.insertMany(data);
-		return docs.map((doc) => doc.toObject() as T);
+		return docs.map((doc) => (doc as unknown as Document).toObject() as T);
 	}
 
 	async findOneByOrg(

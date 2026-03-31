@@ -1,13 +1,14 @@
+import { createHash, randomUUID } from "node:crypto";
 import {
 	BadRequestException,
 	ConflictException,
 	ForbiddenException,
 	Injectable,
-	Logger,
 	UnauthorizedException,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
+import { InjectConnection } from "@nestjs/mongoose";
 import type {
 	AuthenticatedUser,
 	ForgotPasswordRequestDto,
@@ -21,10 +22,8 @@ import type {
 	SignupRequestDto,
 } from "@tstack/shared";
 import { DEFAULT_ROLE_NAMES } from "@tstack/shared";
-import { InjectConnection } from "@nestjs/mongoose";
 import * as argon2 from "argon2";
 import type { Connection } from "mongoose";
-import { createHash, randomUUID } from "node:crypto";
 import { EmailService } from "../email/email.service";
 import { MembershipRepository } from "../membership/membership.repository";
 import { MembershipService } from "../membership/membership.service";
@@ -42,8 +41,6 @@ interface TokenPair {
 
 @Injectable()
 export class AuthService {
-	private readonly logger = new Logger(AuthService.name);
-
 	constructor(
 		@InjectConnection() private readonly connection: Connection,
 		private readonly userRepository: UserRepository,
@@ -72,10 +69,9 @@ export class AuthService {
 			throw new UnauthorizedException("Invalid email or password");
 		}
 
-		const userId = String((user as Record<string, unknown>)._id);
-		const memberships = await this.membershipService.getMembershipsForUser(
-			userId,
-		);
+		const userId = String((user as unknown as { _id: string })._id);
+		const memberships =
+			await this.membershipService.getMembershipsForUser(userId);
 
 		// Build org membership list
 		const orgMemberships: OrgMembership[] = [];
@@ -83,7 +79,7 @@ export class AuthService {
 			const org = await this.orgRepository.findById(String(m.orgId));
 			if (org) {
 				orgMemberships.push({
-					orgId: String((org as Record<string, unknown>)._id),
+					orgId: String((org as unknown as { _id: string })._id),
 					orgName: org.name,
 					roleNames: m.roleNames,
 					status: m.status as "active" | "inactive",
@@ -126,10 +122,7 @@ export class AuthService {
 		}
 
 		// Resolve permissions
-		const permissions = await this.resolveAllPermissions(
-			userId,
-			selectedOrgId,
-		);
+		const permissions = await this.resolveAllPermissions(userId, selectedOrgId);
 
 		const tokens = await this.issueTokens(
 			userId,
@@ -170,9 +163,7 @@ export class AuthService {
 
 	async signup(dto: SignupRequestDto): Promise<LoginResponse> {
 		// Check if signup is allowed
-		const allowSignup = await this.systemSettingService.getValue(
-			"allowSignup",
-		);
+		const allowSignup = await this.systemSettingService.getValue("allowSignup");
 		if (allowSignup === false) {
 			throw new ForbiddenException("Signup is currently disabled");
 		}
@@ -204,7 +195,7 @@ export class AuthService {
 					session,
 				);
 
-				userId = String((user as Record<string, unknown>)._id);
+				userId = String((user as unknown as { _id: string })._id);
 
 				const org = await this.orgRepository.create(
 					{
@@ -218,7 +209,7 @@ export class AuthService {
 					session,
 				);
 
-				orgId = String((org as Record<string, unknown>)._id);
+				orgId = String((org as unknown as { _id: string })._id);
 
 				await this.membershipRepository.create(
 					{
@@ -313,17 +304,12 @@ export class AuthService {
 
 		// Verify stored refresh token matches
 		const tokenHash = this.hashToken(dto.refreshToken);
-		if (
-			!user.refreshTokenHash ||
-			user.refreshTokenHash !== tokenHash
-		) {
+		if (!user.refreshTokenHash || user.refreshTokenHash !== tokenHash) {
 			throw new UnauthorizedException("Refresh token has been revoked");
 		}
 
-		const userId = String((user as Record<string, unknown>)._id);
-		const orgId = user.currentOrgId
-			? String(user.currentOrgId)
-			: null;
+		const userId = String((user as unknown as { _id: string })._id);
+		const orgId = user.currentOrgId ? String(user.currentOrgId) : null;
 
 		// Re-resolve permissions
 		const permissions = await this.resolveAllPermissions(userId, orgId);
@@ -357,7 +343,7 @@ export class AuthService {
 			const org = await this.orgRepository.findById(String(m.orgId));
 			if (org) {
 				orgMemberships.push({
-					orgId: String((org as Record<string, unknown>)._id),
+					orgId: String((org as unknown as { _id: string })._id),
 					orgName: org.name,
 					roleNames: m.roleNames,
 					status: m.status as "active" | "inactive",
@@ -407,7 +393,7 @@ export class AuthService {
 		const tokenHash = this.hashToken(token);
 		const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
 
-		const userId = String((user as Record<string, unknown>)._id);
+		const userId = String((user as unknown as { _id: string })._id);
 		await this.userRepository.updateById(userId, {
 			$set: {
 				resetPasswordTokenHash: tokenHash,
@@ -444,7 +430,7 @@ export class AuthService {
 		}
 
 		const passwordHash = await argon2.hash(dto.newPassword);
-		const userId = String((user as Record<string, unknown>)._id);
+		const userId = String((user as unknown as { _id: string })._id);
 
 		await this.userRepository.updateById(userId, {
 			$set: {
@@ -506,7 +492,7 @@ export class AuthService {
 			const org = await this.orgRepository.findById(String(m.orgId));
 			if (org) {
 				orgMemberships.push({
-					orgId: String((org as Record<string, unknown>)._id),
+					orgId: String((org as unknown as { _id: string })._id),
 					orgName: org.name,
 					roleNames: m.roleNames,
 					status: m.status as "active" | "inactive",
@@ -545,7 +531,7 @@ export class AuthService {
 			const org = await this.orgRepository.findById(String(m.orgId));
 			if (org) {
 				orgMemberships.push({
-					orgId: String((org as Record<string, unknown>)._id),
+					orgId: String((org as unknown as { _id: string })._id),
 					orgName: org.name,
 					roleNames: m.roleNames,
 					status: m.status as "active" | "inactive",
@@ -599,9 +585,8 @@ export class AuthService {
 		orgId: string | null,
 		permissions: string[],
 	): Promise<TokenPair> {
-		const accessTtl = this.configService.getOrThrow<string>(
-			"jwt.JWT_ACCESS_TTL",
-		);
+		const accessTtl =
+			this.configService.getOrThrow<string>("jwt.JWT_ACCESS_TTL");
 		const refreshTtl = this.configService.getOrThrow<string>(
 			"jwt.JWT_REFRESH_TTL",
 		);
@@ -622,19 +607,28 @@ export class AuthService {
 			tokenType: "refresh",
 		};
 
+		const accessExpiresMs = this.parseTtlMs(accessTtl);
+		const refreshExpiresMs = this.parseTtlMs(refreshTtl);
+
 		const [accessToken, refreshToken] = await Promise.all([
-			this.jwtService.signAsync(accessPayload, {
-				secret: this.configService.getOrThrow<string>(
-					"jwt.JWT_ACCESS_SECRET",
-				),
-				expiresIn: accessTtl,
-			}),
-			this.jwtService.signAsync(refreshPayload, {
-				secret: this.configService.getOrThrow<string>(
-					"jwt.JWT_REFRESH_SECRET",
-				),
-				expiresIn: refreshTtl,
-			}),
+			this.jwtService.signAsync(
+				{ ...accessPayload } as Record<string, unknown>,
+				{
+					secret: this.configService.getOrThrow<string>(
+						"jwt.JWT_ACCESS_SECRET",
+					),
+					expiresIn: Math.floor(accessExpiresMs / 1000),
+				},
+			),
+			this.jwtService.signAsync(
+				{ ...refreshPayload } as Record<string, unknown>,
+				{
+					secret: this.configService.getOrThrow<string>(
+						"jwt.JWT_REFRESH_SECRET",
+					),
+					expiresIn: Math.floor(refreshExpiresMs / 1000),
+				},
+			),
 		]);
 
 		return {

@@ -1,7 +1,6 @@
 import {
 	ConflictException,
 	Injectable,
-	Logger,
 	NotFoundException,
 } from "@nestjs/common";
 import type { AddMemberDto, UpdateMemberDto } from "@tstack/shared";
@@ -12,8 +11,6 @@ import { MembershipRepository } from "./membership.repository";
 
 @Injectable()
 export class MembershipService {
-	private readonly logger = new Logger(MembershipService.name);
-
 	constructor(
 		private readonly membershipRepository: MembershipRepository,
 		private readonly userRepository: UserRepository,
@@ -36,13 +33,15 @@ export class MembershipService {
 			});
 		}
 
-		const userId = String((user as Record<string, unknown>)._id);
+		const userId = String((user as unknown as { _id: string })._id);
 		const existing = await this.membershipRepository.findByUserAndOrg(
 			userId,
 			orgId,
 		);
 		if (existing) {
-			throw new ConflictException("User is already a member of this organization");
+			throw new ConflictException(
+				"User is already a member of this organization",
+			);
 		}
 
 		return this.membershipRepository.create({
@@ -76,13 +75,13 @@ export class MembershipService {
 		return this.membershipRepository.deleteById(membershipId);
 	}
 
-	async listMembers(
-		orgId: string,
-		options: { page?: number; limit?: number },
-	) {
+	async listMembers(orgId: string, options: { page?: number; limit?: number }) {
 		const page = options.page ?? 1;
 		const limit = options.limit ?? 20;
-		const result = await this.membershipRepository.findByOrgId(orgId, { page, limit });
+		const result = await this.membershipRepository.findByOrgId(orgId, {
+			page,
+			limit,
+		});
 
 		const userIds = result.data.map((m) => String(m.userId));
 		const users = await Promise.all(
@@ -92,7 +91,7 @@ export class MembershipService {
 		const enriched = result.data.map((m, i) => {
 			const user = users[i];
 			return {
-				_id: String((m as Record<string, unknown>)._id),
+				_id: String((m as unknown as { _id: string })._id),
 				userId: String(m.userId),
 				orgId: String(m.orgId),
 				email: user?.email ?? "",

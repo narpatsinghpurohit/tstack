@@ -1,13 +1,12 @@
+import { createHash, randomUUID } from "node:crypto";
 import {
 	BadRequestException,
 	ConflictException,
 	Injectable,
-	Logger,
 	NotFoundException,
 } from "@nestjs/common";
 import type { AcceptInvitationDto, CreateInvitationDto } from "@tstack/shared";
 import * as argon2 from "argon2";
-import { createHash, randomUUID } from "node:crypto";
 import { EmailService } from "../email/email.service";
 import { MembershipRepository } from "../membership/membership.repository";
 import { OrganizationRepository } from "../organization/organization.repository";
@@ -16,8 +15,6 @@ import { InvitationRepository } from "./invitation.repository";
 
 @Injectable()
 export class InvitationService {
-	private readonly logger = new Logger(InvitationService.name);
-
 	constructor(
 		private readonly invitationRepository: InvitationRepository,
 		private readonly userRepository: UserRepository,
@@ -36,7 +33,7 @@ export class InvitationService {
 		if (existingUser) {
 			const existingMembership =
 				await this.membershipRepository.findByUserAndOrg(
-					String((existingUser as Record<string, unknown>)._id),
+					String((existingUser as unknown as { _id: string })._id),
 					orgId,
 				);
 			if (existingMembership) {
@@ -105,13 +102,12 @@ export class InvitationService {
 			});
 		}
 
-		const userId = String((user as Record<string, unknown>)._id);
+		const userId = String((user as unknown as { _id: string })._id);
 
-		const existingMembership =
-			await this.membershipRepository.findByUserAndOrg(
-				userId,
-				String(invitation.orgId),
-			);
+		const existingMembership = await this.membershipRepository.findByUserAndOrg(
+			userId,
+			String(invitation.orgId),
+		);
 
 		if (!existingMembership) {
 			await this.membershipRepository.create({
@@ -123,19 +119,19 @@ export class InvitationService {
 		}
 
 		await this.invitationRepository.deleteById(
-			String((invitation as Record<string, unknown>)._id),
+			String((invitation as unknown as { _id: string })._id),
 		);
 
 		return { message: "Invitation accepted successfully" };
 	}
 
-	async listByOrg(
-		orgId: string,
-		options: { page?: number; limit?: number },
-	) {
+	async listByOrg(orgId: string, options: { page?: number; limit?: number }) {
 		const page = options.page ?? 1;
 		const limit = options.limit ?? 20;
-		const result = await this.invitationRepository.findByOrgId(orgId, { page, limit });
+		const result = await this.invitationRepository.findByOrgId(orgId, {
+			page,
+			limit,
+		});
 
 		return {
 			data: result.data,

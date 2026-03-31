@@ -1,7 +1,6 @@
 import {
 	ConflictException,
 	Injectable,
-	Logger,
 	NotFoundException,
 	UnauthorizedException,
 } from "@nestjs/common";
@@ -18,8 +17,6 @@ import { UserRepository } from "./user.repository";
 
 @Injectable()
 export class UserService {
-	private readonly logger = new Logger(UserService.name);
-
 	constructor(
 		private readonly userRepository: UserRepository,
 		private readonly roleService: RoleService,
@@ -84,7 +81,10 @@ export class UserService {
 
 		if (dto.email) {
 			const existing = await this.userRepository.findByEmail(dto.email);
-			if (existing && String((existing as Record<string, unknown>)._id) !== id) {
+			if (
+				existing &&
+				String((existing as unknown as { _id: string })._id) !== id
+			) {
 				throw new ConflictException("Email already in use");
 			}
 		}
