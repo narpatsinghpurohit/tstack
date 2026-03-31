@@ -246,7 +246,26 @@ const form = useForm<CreateProductDto>({ resolver: zodResolver(createProductSche
 
 ## Contributing
 
-PRs welcome. Follow the conventions — the code reviewer agent will check your work.
+tstack is in **early stage** — it's a working concept, not a polished product yet. Things will break, APIs will change, and conventions will evolve.
+
+That said, contributions are welcome. Here's how:
+
+**What helps most right now:**
+- Try it. Fork it, build something on top, and report what breaks.
+- Open issues for bugs, rough edges, or missing features.
+- Improve the `.claude/` skills — better rules, examples, and patterns make the AI produce better code.
+
+**Before submitting a PR:**
+1. Follow the existing conventions (3-file split, BaseRepository, Zod schemas in shared)
+2. Run `bun run type-check` and `bun run lint` — both must pass
+3. Don't add features that belong in userland (domain-specific modules, custom themes, etc.)
+
+**Not accepting right now:**
+- Large architectural changes (let the foundation settle first)
+- New frameworks or ORMs (NestJS + Mongoose + React is the stack)
+- Expo migration (this is React Native CLI by design)
+
+If you're unsure, open an issue first and let's talk.
 
 ## License
 
